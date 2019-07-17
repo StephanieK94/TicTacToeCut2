@@ -11,12 +11,13 @@ namespace TicTacTestLibrary
         [Fact]
         public void GivenNewGame_ReturnsEmptyGameboard()
         {
-            Game game = new TicTacToe.Game();
-            var expectedGameboard = new string[,] { { "", "", "" }, { "", "", "" }, { "", "", "" }};
+            Game game = new Game();
+            var expectedGameboard = new BoardPiece[,] {
+                { BoardPiece.Empty, BoardPiece.Empty, BoardPiece.Empty } ,
+                { BoardPiece.Empty , BoardPiece.Empty , BoardPiece.Empty } ,
+                { BoardPiece.Empty , BoardPiece.Empty , BoardPiece.Empty } };
 
-            Assert.Equal(expectedGameboard, game.Board);
+            Assert.Equal(expectedGameboard, game.board.board);
         }
-
-
     }
 }
