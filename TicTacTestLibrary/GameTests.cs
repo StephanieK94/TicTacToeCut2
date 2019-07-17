@@ -14,7 +14,9 @@ namespace TicTacTestLibrary
             Game game = new TicTacToe.Game();
             var expectedGameboard = new string[,] { { "", "", "" }, { "", "", "" }, { "", "", "" }};
 
-            Assert.Equal(expectedGameboard, game.board);
+            Assert.Equal(expectedGameboard, game.Board);
         }
+
+
     }
 }
