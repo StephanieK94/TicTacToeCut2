@@ -26,6 +26,7 @@ namespace TicTacToe
             this.Column = newMove.Column;
         }
 
+        // todo: resolve the error of inputting non-int characters?
         public void ConvertPlayerInputToMove(string userString)
         {
             var input = userString.Split( ',' );
