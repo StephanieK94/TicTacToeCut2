@@ -6,9 +6,9 @@ namespace TicTacToe
     {
         static void Main(string[] args)
         {
+            StartNewGame:
             Game game = new Game();
 
-            StartNewGame:
             game.StartGame();
 
             if ( game.PromptForNewGame() == true )

@@ -16,25 +16,23 @@ namespace TicTacToe
         public Board board = new Board();
         public Player currentPlayer = new Player();
         public Move nextMove = new Move();
-
-
-
         public Messages msg = new Messages();
-        public Winner winCal = new Winner();
-
 
         public void StartGame() // public Game() instead?
         {
             Console.WriteLine( msg.Welcome );
+            board.PrintBoard();
 
             Prompt:
             Console.WriteLine( msg.PromptForMove( currentPlayer ) );
 
             var playerInput = Console.ReadLine();
+            WinCalculator winCal = new WinCalculator();
 
             if ( nextMove.CheckForForfeit( playerInput ) == true )
             {
                 currentPlayer.ChangePlayer();
+                winCal.IsWinner = true;
                 goto EndGame;
             }
 
@@ -49,18 +47,19 @@ namespace TicTacToe
             switch( board.VaidatePositionIsEmpty(nextMove))
             {
                 case true:
+                    board.PlayMoveOnBoard( currentPlayer , nextMove );
                     Console.WriteLine( msg.AcceptedMove );
-                    board.PlayMoveOnBoard( currentPlayer, nextMove );
+                    board.PrintBoard();
                     break;
                 default:
                     Console.WriteLine( msg.InvalidMoveMessage );
                     goto Prompt;
             }
 
-            winCal.GetWinner(currentPlayer, board.board, nextMove);
+            winCal.WinnerCalculator( currentPlayer , board.board , nextMove );
             turnCount++;
 
-            if(winCal.IsWinner != true && turnCount != 9)
+            if(winCal.IsWinner == false && turnCount < 9)
             {
                 currentPlayer.ChangePlayer();
                 goto Prompt;
