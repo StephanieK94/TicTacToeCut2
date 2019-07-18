@@ -19,5 +19,15 @@ namespace TicTacTestLibrary
 
             Assert.Equal(expectedGameboard, game.board.board);
         }
+
+        [Fact]
+        public void GivenNameGame_WinnerAsCurrentPlayerExpectedX()
+        {
+            Game game = new Game();
+            var expectedWinner = BoardPiece.X;
+
+            game.StartGame();
+            Assert.Equal( expectedWinner , game.currentPlayer.Character );
+        }
     }
 }
