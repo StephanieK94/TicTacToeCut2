@@ -10,28 +10,36 @@ namespace TicTacToe
         public Player currentPlayer = new Player();
         public Move nextMove = new Move();
         public MessageList msg = new MessageList();
+        public Winner winCal = new Winner();
 
-        public void StartGame()
+
+        public void StartGame() // public Game() instead?
         {
             Console.WriteLine( msg.Welcome );
 
             Prompt:
             Console.WriteLine( msg.PromptForMove( currentPlayer ) );
-            nextMove.ConvertPlayerInputToMove( Console.ReadLine() );
 
-            switch ( nextMove.ValidateUserMoves( nextMove ) )
+            var playerInput = Console.ReadLine();
+
+            if ( nextMove.CheckForForfeit( playerInput ) == true )
             {
-                case true:
-                    nextMove.SetPosition( nextMove );
-                    break;
-                default:
-                    Console.WriteLine( msg.OutOfBoundMessage );
-                    goto Prompt;
+                currentPlayer.ChangePlayer();
+                goto EndGame;
             }
 
-            switch( board.VaidatePosition(nextMove))
+            nextMove.ConvertPlayerInputToMove( playerInput );
+
+            if ( nextMove.ValidatePlayerMoves( nextMove ) == false)
+            {
+                Console.WriteLine( msg.OutOfBoundMessage );
+                goto Prompt;
+            }
+
+            switch( board.VaidatePositionIsEmpty(nextMove))
             {
                 case true:
+                    Console.WriteLine( msg.AcceptedMove );
                     board.PlayMoveOnBoard( currentPlayer, nextMove );
                     break;
                 default:
@@ -40,7 +48,7 @@ namespace TicTacToe
             }
 
 
-
+            EndGame:
             Console.WriteLine( msg.PrintWinner( currentPlayer )) ;
         }
     }

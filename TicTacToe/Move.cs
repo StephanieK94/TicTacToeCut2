@@ -34,7 +34,7 @@ namespace TicTacToe
             this.Column = Convert.ToInt32( input[1] ) - 1;
         }
 
-        public bool ValidateUserMoves(Move userInput)
+        public bool ValidatePlayerMoves(Move userInput)
         {
             if ( userInput.Row < 0 || userInput.Row > 2 ) return false;
             if ( userInput.Column < 0 || userInput.Column > 2 ) return false;

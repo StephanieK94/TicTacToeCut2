@@ -12,7 +12,6 @@ namespace TicTacToe
             set { _board = value; }
         }
 
-        // Default constructor for the empty tic tac toe baord
         public Board ()
         {
             board = new BoardPiece[,] {
@@ -26,7 +25,7 @@ namespace TicTacToe
             this.board[currentMove.Row , currentMove.Column] = currentPlayer.Character;
         }
 
-        public bool VaidatePosition(Move currentMiove)
+        public bool VaidatePositionIsEmpty(Move currentMiove)
         {
             if ( this.board[currentMiove.Row, currentMiove.Column] == BoardPiece.Empty ) return true;
             return false;
