@@ -30,8 +30,8 @@ namespace TicTacToe
         {
             var input = userString.Split( ',' );
 
-            this.Row = Convert.ToInt32( input[0] ) - 1;
-            this.Column = Convert.ToInt32( input[1] ) - 1;
+            this.Row = Convert.ToInt32( input[0] );
+            this.Column = Convert.ToInt32( input[1] );
         }
 
         public bool ValidatePlayerMoves(Move userInput)

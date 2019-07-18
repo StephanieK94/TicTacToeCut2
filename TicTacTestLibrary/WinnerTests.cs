@@ -17,10 +17,10 @@ namespace TicTacTestLibrary
             };
 
             var player = new Player() { Character = BoardPiece.X };
-            var nextMove = new Move() { Row = 1 , Column = 1 };
+            var lastMove = new Move() { Row = 1 , Column = 1 };
 
             Game game = new Game();
-            game.winCal.GetWinner( player , currentBoard , nextMove );
+            game.winCal.GetWinner( player , currentBoard , lastMove );
 
             Assert.True( game.winCal.IsWinner );
         }
@@ -36,10 +36,10 @@ namespace TicTacTestLibrary
             };
 
             var player = new Player() { Character = BoardPiece.X };
-            var nextMove = new Move() { Row = 1 , Column = 1 };
+            var lastMove = new Move() { Row = 1 , Column = 1 };
 
             Game game = new Game();
-            game.winCal.GetWinner( player , currentBoard , nextMove );
+            game.winCal.GetWinner( player , currentBoard , lastMove );
 
             Assert.True( game.winCal.IsWinner );
         }
@@ -55,10 +55,10 @@ namespace TicTacTestLibrary
             };
 
             var player = new Player() { Character = BoardPiece.X };
-            var nextMove = new Move() { Row = 1 , Column = 1 };
+            var lastMove = new Move() { Row = 1 , Column = 1 };
 
             Game game = new Game();
-            game.winCal.GetWinner( player , currentBoard , nextMove );
+            game.winCal.GetWinner( player , currentBoard , lastMove );
 
             Assert.True( game.winCal.IsWinner );
         }
@@ -74,10 +74,10 @@ namespace TicTacTestLibrary
             };
 
             var player = new Player() { Character = BoardPiece.X };
-            var nextMove = new Move() { Row = 1 , Column = 1 };
+            var lastMove = new Move() { Row = 1 , Column = 1 };
 
             Game game = new Game();
-            game.winCal.GetWinner( player , currentBoard , nextMove );
+            game.winCal.GetWinner( player , currentBoard , lastMove );
 
             Assert.True( game.winCal.IsWinner );
         }
@@ -93,10 +93,10 @@ namespace TicTacTestLibrary
             };
 
             var player = new Player() { Character = BoardPiece.X };
-            var nextMove = new Move() { Row = 1 , Column = 1 };
+            var lastMove = new Move() { Row = 1 , Column = 1 };
 
             Game game = new Game();
-            game.winCal.GetWinner( player , currentBoard , nextMove );
+            game.winCal.GetWinner( player , currentBoard , lastMove );
 
             Assert.False( game.winCal.IsWinner );
         }
@@ -112,10 +112,10 @@ namespace TicTacTestLibrary
             };
 
             var player = new Player() { Character = BoardPiece.X };
-            var nextMove = new Move() { Row = 1 , Column = 1 };
+            var lastMove = new Move() { Row = 1 , Column = 1 };
 
             Game game = new Game();
-            game.winCal.GetWinner( player , currentBoard , nextMove );
+            game.winCal.GetWinner( player , currentBoard , lastMove );
 
             Assert.False( game.winCal.IsWinner );
         }
