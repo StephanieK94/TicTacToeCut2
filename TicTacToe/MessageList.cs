@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TicTacToe
 {
-    public class MessageList
+    public class Messages
     {
         public string Welcome = new string( "Welcome to Tic Tac Toe!\n" + "Here's the current board:\n" );
 
@@ -15,6 +15,8 @@ namespace TicTacToe
         public string OutOfBoundMessage = new string( "\nOh no, your coordinates were out of the acceptable range." + "\nRows and Columns are 1,2, or 3 based on the board. Try again...\n" );
 
         public string InvalidMoveMessage = new string( "\nOh no, a piece is already in this place! Try again...\n" );
+
+        public string PromptForNewGame = new string( "\nWould you like to play again? Y / N: " );
 
         public string PromptForMove(Player currentPlayer)
         {

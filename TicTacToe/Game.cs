@@ -6,10 +6,20 @@ namespace TicTacToe
 {
     public class Game
     {
+        private int _turnCount;
+        public int turnCount
+        {
+            get { return _turnCount; }
+            set { _turnCount = value; }
+        }
+
         public Board board = new Board();
         public Player currentPlayer = new Player();
         public Move nextMove = new Move();
-        public MessageList msg = new MessageList();
+
+
+
+        public Messages msg = new Messages();
         public Winner winCal = new Winner();
 
 
@@ -47,9 +57,27 @@ namespace TicTacToe
                     goto Prompt;
             }
 
+            winCal.GetWinner(currentPlayer, board.board, nextMove);
+            turnCount++;
+
+            if(winCal.IsWinner != true && turnCount != 9)
+            {
+                currentPlayer.ChangePlayer();
+                goto Prompt;
+            }
 
             EndGame:
-            Console.WriteLine( msg.PrintWinner( currentPlayer )) ;
+            if ( winCal.IsWinner == false ) Console.WriteLine(msg.ResultWasDraw);
+            else Console.WriteLine( msg.PrintWinner( currentPlayer )) ;
+        }
+
+        public bool PromptForNewGame ()
+        {
+            Console.WriteLine( msg.PromptForNewGame );
+            var playAgain = Console.ReadLine();
+
+            if ( playAgain.Contains( "Y".ToLower() )) return true;
+            return false;
         }
     }
 }

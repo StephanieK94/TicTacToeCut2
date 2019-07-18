@@ -8,7 +8,12 @@ namespace TicTacToe
         {
             Game game = new Game();
 
+            StartNewGame:
             game.StartGame();
+
+            if ( game.PromptForNewGame() == true )
+                goto StartNewGame;
+
         }
     }
 }
