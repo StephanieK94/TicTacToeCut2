@@ -40,5 +40,11 @@ namespace TicTacToe
             if ( userInput.Column < 0 || userInput.Column > 2 ) return false;
             return true;
         }
+
+        public bool CheckForForfeit(string userInput)
+        {
+            if ( userInput.Contains( "Q" ) || userInput.Contains( "q" ) ) return true;
+            return false;
+        }
     }
 }
