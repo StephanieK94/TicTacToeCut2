@@ -17,12 +17,12 @@ namespace TicTacTestLibrary
             };
 
             var player = new Player() { Character = BoardPiece.X };
-            var lastMove = new Move() { Row = 1 , Column = 1 };
+            var nextMove = new Move() { Row = 1 , Column = 1 };
 
-            Game game = new Game();
-            game.winCal.GetWinner( player , currentBoard , lastMove );
+            WinCalculator winCal = new WinCalculator();
+            winCal.WinnerCalculator( player , currentBoard , nextMove );
 
-            Assert.True( game.winCal.IsWinner );
+            Assert.True( winCal.IsWinner );
         }
 
         [Fact]
@@ -36,12 +36,12 @@ namespace TicTacTestLibrary
             };
 
             var player = new Player() { Character = BoardPiece.X };
-            var lastMove = new Move() { Row = 1 , Column = 1 };
+            var nextMove = new Move() { Row = 1 , Column = 1 };
 
-            Game game = new Game();
-            game.winCal.GetWinner( player , currentBoard , lastMove );
+            WinCalculator winCal = new WinCalculator();
+            winCal.WinnerCalculator( player , currentBoard , nextMove );
 
-            Assert.True( game.winCal.IsWinner );
+            Assert.True( winCal.IsWinner );
         }
 
         [Fact]
@@ -55,12 +55,12 @@ namespace TicTacTestLibrary
             };
 
             var player = new Player() { Character = BoardPiece.X };
-            var lastMove = new Move() { Row = 1 , Column = 1 };
+            var nextMove = new Move() { Row = 1 , Column = 1 };
 
-            Game game = new Game();
-            game.winCal.GetWinner( player , currentBoard , lastMove );
+            WinCalculator winCal = new WinCalculator();
+            winCal.WinnerCalculator( player , currentBoard , nextMove );
 
-            Assert.True( game.winCal.IsWinner );
+            Assert.True( winCal.IsWinner );
         }
 
         [Fact]
@@ -74,12 +74,12 @@ namespace TicTacTestLibrary
             };
 
             var player = new Player() { Character = BoardPiece.X };
-            var lastMove = new Move() { Row = 1 , Column = 1 };
+            var nextMove = new Move() { Row = 1 , Column = 1 };
 
-            Game game = new Game();
-            game.winCal.GetWinner( player , currentBoard , lastMove );
+            WinCalculator winCal = new WinCalculator();
+            winCal.WinnerCalculator( player , currentBoard , nextMove );
 
-            Assert.True( game.winCal.IsWinner );
+            Assert.True( winCal.IsWinner );
         }
 
         [Fact]
@@ -93,12 +93,12 @@ namespace TicTacTestLibrary
             };
 
             var player = new Player() { Character = BoardPiece.X };
-            var lastMove = new Move() { Row = 1 , Column = 1 };
+            var nextMove = new Move() { Row = 1 , Column = 1 };
 
-            Game game = new Game();
-            game.winCal.GetWinner( player , currentBoard , lastMove );
+            WinCalculator winCal = new WinCalculator();
+            winCal.WinnerCalculator( player , currentBoard , nextMove );
 
-            Assert.False( game.winCal.IsWinner );
+            Assert.False( winCal.IsWinner );
         }
 
         [Fact]
@@ -112,12 +112,12 @@ namespace TicTacTestLibrary
             };
 
             var player = new Player() { Character = BoardPiece.X };
-            var lastMove = new Move() { Row = 1 , Column = 1 };
+            var nextMove = new Move() { Row = 1 , Column = 1 };
 
-            Game game = new Game();
-            game.winCal.GetWinner( player , currentBoard , lastMove );
+            WinCalculator winCal = new WinCalculator();
+            winCal.WinnerCalculator( player , currentBoard , nextMove );
 
-            Assert.False( game.winCal.IsWinner );
+            Assert.False( winCal.IsWinner );
         }
     }
 }
