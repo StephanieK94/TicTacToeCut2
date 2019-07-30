@@ -25,9 +25,9 @@ namespace TicTacToe
             this.board[currentMove.Row , currentMove.Column] = currentPlayer.Character;
         }
 
-        public bool VaidatePositionIsEmpty(Move currentMiove)
+        public bool VaidatePositionIsEmpty(Move currentMove)
         {
-            if ( this.board[currentMiove.Row, currentMiove.Column] == BoardPiece.Empty ) return true;
+            if ( this.board[currentMove.Row, currentMove.Column] == BoardPiece.Empty ) return true;
             return false;
         }
 

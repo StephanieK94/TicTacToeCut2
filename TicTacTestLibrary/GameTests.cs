@@ -11,7 +11,7 @@ namespace TicTacTestLibrary
         [Fact]
         public void GivenNewGame_ReturnsEmptyGameboard ()
         {
-            Game game = new Game();
+            NewGame game = new NewGame();
             var expectedGameboard = new BoardPiece[,] {
                 { BoardPiece.Empty, BoardPiece.Empty, BoardPiece.Empty } ,
                 { BoardPiece.Empty , BoardPiece.Empty , BoardPiece.Empty } ,
@@ -23,7 +23,7 @@ namespace TicTacTestLibrary
         [Fact]
         public void GivenNewGame_ReturnsCurrentPlayerX()
         {
-            Game game = new Game();
+            NewGame game = new NewGame();
             var expectedStartPlayer = BoardPiece.X;
 
             Assert.Equal( expectedStartPlayer , game.currentPlayer.Character );
@@ -32,7 +32,7 @@ namespace TicTacTestLibrary
         [Fact]
         public void GivenNewGame_ReturnsnextMoveAsZero()
         {
-            Game game = new Game();
+            NewGame game = new NewGame();
 
             Assert.Equal( 0 , game.nextMove.Row );
             Assert.Equal( 0 , game.nextMove.Column );

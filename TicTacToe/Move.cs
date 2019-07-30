@@ -20,13 +20,6 @@ namespace TicTacToe
             set { _column = value - 1; }
         }
 
-        public void SetPosition(Move newMove)
-        {
-            this.Row = newMove.Row;
-            this.Column = newMove.Column;
-        }
-
-        // todo: resolve the error of inputting non-int characters?
         public bool ConvertPlayerInputToMove(string userString)
         {
             try

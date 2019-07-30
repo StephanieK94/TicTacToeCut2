@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TicTacToe
 {
-    public class Game
+    public class NewGame
     {
         private int _turnCount;
         public int turnCount
@@ -16,17 +16,17 @@ namespace TicTacToe
         public Board board = new Board();
         public Player currentPlayer = new Player();
         public Move nextMove = new Move();
-        public Messages msg = new Messages();
+        public Messages messages = new Messages();
 
-        public void StartGame() // public Game() instead?
+        public void StartGame() 
         {
-            Console.WriteLine( msg.Welcome );
+            messages.PrintToConsole(messages.dictionary["Welcome"]);
             board.PrintBoard();
 
             Prompt:
-            Console.WriteLine( msg.PromptForMove( currentPlayer ) );
+            messages.PrintToConsole( messages.PromptForMove( currentPlayer ) );
 
-            var playerInput = Console.ReadLine();
+            var playerInput = GetInput();
             WinCalculator winCal = new WinCalculator();
 
             if ( nextMove.CheckForForfeit( playerInput ) == true )
@@ -38,13 +38,13 @@ namespace TicTacToe
 
             if ( nextMove.ConvertPlayerInputToMove( playerInput ) == false )
             {
-                Console.WriteLine( msg.InvalidInputMessage );
+                messages.PrintToConsole( messages.dictionary["InvalidInput"] );
                 goto Prompt;
             }
 
             if ( nextMove.ValidatePlayerMoves( nextMove ) == false)
             {
-                Console.WriteLine( msg.OutOfBoundMessage );
+                messages.PrintToConsole( messages.dictionary["OutOfBound"] );
                 goto Prompt;
             }
 
@@ -52,11 +52,11 @@ namespace TicTacToe
             {
                 case true:
                     board.PlayMoveOnBoard( currentPlayer , nextMove );
-                    Console.WriteLine( msg.AcceptedMove );
+                    messages.PrintToConsole( messages.dictionary["AcceptedMove"] );
                     board.PrintBoard();
                     break;
                 default:
-                    Console.WriteLine( msg.InvalidMoveMessage );
+                    messages.PrintToConsole( messages.dictionary["InvalidMove"] );
                     goto Prompt;
             }
 
@@ -70,17 +70,23 @@ namespace TicTacToe
             }
 
             EndGame:
-            if ( winCal.IsWinner == false ) Console.WriteLine(msg.ResultWasDraw);
-            else Console.WriteLine( msg.PrintWinner( currentPlayer )) ;
+            if ( winCal.IsWinner == false ) messages.PrintToConsole( messages.dictionary["ResultWasDraw"]);
+            else messages.PrintToConsole( messages.PrintWinner( currentPlayer )) ;
         }
 
         public bool PromptForNewGame ()
         {
-            Console.WriteLine( msg.PromptForNewGame );
-            var playAgain = Console.ReadLine();
+            messages.PrintToConsole( messages.dictionary["PromptForNewGame"] );
+
+            var playAgain = GetInput();
 
             if ( playAgain.Contains( "Y".ToLower() )) return true;
             return false;
+        }
+
+        public string GetInput()
+        {
+            return Console.ReadLine();
         }
     }
 }

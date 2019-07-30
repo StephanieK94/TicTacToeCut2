@@ -11,10 +11,10 @@ namespace TicTacTestLibrary
         [Fact]
         public void GivenPlayerX_WhenPromptForMoveCalled_ReturnsPlayerXEnumInMsg ()
         {
-            Game game = new Game();
+            NewGame game = new NewGame();
 
             var expectedMsg = "\nPlayer 1 enter a coord x,y to place your X: ";
-            var actualMsg = game.msg.PromptForMove( game.currentPlayer );
+            var actualMsg = game.messages.PromptForMove( game.currentPlayer );
 
             Assert.Equal( expectedMsg , actualMsg );
         }
@@ -22,9 +22,9 @@ namespace TicTacTestLibrary
         [Fact]
         public void GivenNewGame_WhenPrintWinnerCalled_PrintsXAsWinner()
         {
-            Game game = new Game();
+            NewGame game = new NewGame();
 
-            var actual = game.msg.PrintWinner( game.currentPlayer );
+            var actual = game.messages.PrintWinner( game.currentPlayer );
             var expectedString = "\nWell done X, you won the game!\n";
 
             Assert.Equal( expectedString , actual );
