@@ -36,7 +36,11 @@ namespace TicTacToe
                 goto EndGame;
             }
 
-            nextMove.ConvertPlayerInputToMove( playerInput );
+            if ( nextMove.ConvertPlayerInputToMove( playerInput ) == false )
+            {
+                Console.WriteLine( msg.InvalidInputMessage );
+                goto Prompt;
+            }
 
             if ( nextMove.ValidatePlayerMoves( nextMove ) == false)
             {

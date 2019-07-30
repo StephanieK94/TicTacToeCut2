@@ -34,5 +34,16 @@ namespace TicTacTestLibrary
 
             Assert.Equal( output, playerForfeits );
         }
+
+        [Fact]
+        public void GivenInvalidInput_WhenTriesToConvertMove_ReturnsFalse()
+        {
+            var input = ",1";
+
+            var move = new Move();
+            var isValidInput = move.ConvertPlayerInputToMove( input );
+
+            Assert.False( isValidInput );
+        }
     }
 }

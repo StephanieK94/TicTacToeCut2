@@ -16,6 +16,8 @@ namespace TicTacToe
 
         public string InvalidMoveMessage = new string( "\nOh no, a piece is already in this place! Try again...\n" );
 
+        public string InvalidInputMessage = new string( "\nOh no, invalid coordinates. Try entering two numbers for where you would like to play, like this: 1,1\n" );
+
         public string PromptForNewGame = new string( "\nWould you like to play again? Y / N: " );
 
         public string PromptForMove(Player currentPlayer)

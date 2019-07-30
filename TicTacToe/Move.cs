@@ -27,12 +27,21 @@ namespace TicTacToe
         }
 
         // todo: resolve the error of inputting non-int characters?
-        public void ConvertPlayerInputToMove(string userString)
+        public bool ConvertPlayerInputToMove(string userString)
         {
-            var input = userString.Split( ',' );
+            try
+            {
+                var input = userString.Split( ',' );
 
-            this.Row = Convert.ToInt32( input[0] );
-            this.Column = Convert.ToInt32( input[1] );
+                this.Row = Convert.ToInt32( input[0] );
+                this.Column = Convert.ToInt32( input[1] );
+
+                return true;
+            }
+            catch ( FormatException )
+            {
+                return false;
+            }
         }
 
         public bool ValidatePlayerMoves(Move userInput)
