@@ -31,14 +31,7 @@ namespace TicTacTestLibrary
         {
             var expectedStartPlayer = BoardPiece.X;
 
-            Assert.Equal( expectedStartPlayer , newGame.currentPlayer.Character );
-        }
-
-        [Fact]
-        public void GivenANewGame_ReturnsTheNextMoveSetToZero()
-        {
-            Assert.Equal( 0 , newGame.nextMove.Row );
-            Assert.Equal( 0 , newGame.nextMove.Column );
+            Assert.Equal( expectedStartPlayer , newGame.player.Character );
         }
     }
 }

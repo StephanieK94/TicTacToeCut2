@@ -8,26 +8,29 @@ namespace TicTacTestLibrary
 {
     public class MessagesTests
     {
-        [Fact]
-        public void GivenPlayerX_WhenPromptForMoveCalled_ReturnsPlayerXEnumInMsg ()
+        private readonly NewGame game;
+
+        public MessagesTests()
         {
-            NewGame game = new NewGame();
-
-            var expectedMsg = "\nPlayer 1 enter a coord x,y to place your X: ";
-            var actualMsg = game.messages.PromptForMove( game.currentPlayer );
-
-            Assert.Equal( expectedMsg , actualMsg );
+            game = new NewGame();
         }
 
         [Fact]
-        public void GivenNewGame_WhenPrintWinnerCalled_PrintsXAsWinner()
+        public void GivenPlayerSetAsX_WhenPromptForMoveCalled_ReturnsXAsNumberAndCharacterInMessage ()
         {
-            NewGame game = new NewGame();
+            var expectedMessage = "\nPlayer 1 enter a coord x,y to place your X: ";
+            var actualMessage = game.messages.PromptForMove( game.player );
 
-            var actual = game.messages.PrintWinner( game.currentPlayer );
-            var expectedString = "\nWell done X, you won the game!\n";
+            Assert.Equal( expectedMessage , actualMessage );
+        }
 
-            Assert.Equal( expectedString , actual );
+        [Fact]
+        public void GivenANewGame_WhenPrintWinnerIsCalled_ReturnsXAsWinner()
+        {
+            var actualMessage = game.messages.ReturnWinner( game.player );
+            var expectedMessage = "\nWell done X, you won the game!\n";
+
+            Assert.Equal( expectedMessage , actualMessage );
         }
     }
 }

@@ -8,27 +8,29 @@ namespace TicTacTestLibrary
 {
     public class PlayerTests
     {
-        [Fact]
-        public void GivenNewPlayer_ReturnsXForDefaultCharacter()
-        {
-            Player player1 = new Player();
+        private readonly Player player;
 
-            Assert.Equal(BoardPiece.X, player1.Character);
+        public PlayerTests()
+        {
+            player = new Player();
+        }
+
+        [Fact]
+        public void GivenNewPlayer_ReturnsDefaultCharacterAsX()
+        {
+            Assert.Equal(BoardPiece.X, player.Character);
         }
 
         [Theory]
         [InlineData(BoardPiece.X, BoardPiece.O)]
         [InlineData(BoardPiece.O, BoardPiece.X)]
         [InlineData(BoardPiece.Empty, BoardPiece.X)]
-        public void GivenCurrentPlayer_WhenChangedPlayerCalled_ReturnOtherPlayer(BoardPiece current, BoardPiece expected)
+        public void GivenCurrentPlayer_WhenChangedPlayerCalled_ReturnExpectedPlayer(BoardPiece currentPlayer, BoardPiece expectedPlayer)
         {
-            Player player = new Player();
-
-            player.Character = current;
-
+            player.Character = currentPlayer;
             player.ChangePlayer();
 
-            Assert.Equal(expected, player.Character);
+            Assert.Equal(expectedPlayer, player.Character);
         }
     }
 }
