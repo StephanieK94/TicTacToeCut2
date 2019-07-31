@@ -6,30 +6,82 @@ namespace TicTacToe
 {
     public class WinCalculator
     {
-        public bool WinRow { get; set; }
-        public bool WinColumn { get; set; }
-        public bool WinDiagonal { get; set; }
-        public bool WinRevDiagonal { get; set; }
+        private BoardPiece[,] _board;
+        public BoardPiece[,] board
+        {
+            get { return _board; }
+            set { _board = value; }
+        }
+
+        private bool WinRow { get; set; }
+        private bool WinColumn { get; set; }
+        private bool WinDiagonal { get; set; }
+        private bool WinRevDiagonal { get; set; }
 
         public bool IsWinner { get; set; }
 
-        public void WinnerCalculator ( Player player , BoardPiece[,] board, Move lastMove )
+        public void WinnerCalculator ( BoardPiece[,] currentBoard )
         {
-            WinRow = true;
-            WinColumn = true;
-            WinDiagonal = true;
-            WinRevDiagonal = true;
-            IsWinner = false;
+            board = currentBoard;
 
-            for ( var i = 0 ; i <= 2 ; i++ )
+            WinRow = false;
+            WinColumn = false;
+            WinDiagonal = false;
+
+            this.IsWinner = false;
+
+            CheckRows();
+            CheckColumns();
+            CheckDiagonals();
+
+            this.IsWinner = ( WinRow || WinColumn || WinDiagonal );
+        }
+
+
+        private void CheckRows ( )
+        {
+            for(var row =0 ; row <=2 ; row++ )
             {
-                if ( board[lastMove.Row , i] != player.Character ) this.WinRow = false;
-                if ( board[i , lastMove.Column] != player.Character ) this.WinColumn = false;
-                if ( board[i , i] != player.Character ) this.WinDiagonal = false;
-                if ( board[i , ( 3 - 1 - i )] != player.Character ) this.WinRevDiagonal = false;
-            }
+                var middleField = board[row , 1];
+                if ( middleField == BoardPiece.Empty ) continue;
 
-            this.IsWinner = ( WinRow || WinColumn || WinDiagonal || WinRevDiagonal );
+                if ( board[row , 0] == middleField && board[row , 2] == middleField )
+                {
+                    WinRow = true;
+                    break;
+                }
+            }
+        }
+
+        private void CheckColumns ( )
+        {
+            for ( var column = 0 ; column <= 2 ; column++ )
+            {
+                var middleField = board[1, column];
+                if ( middleField == BoardPiece.Empty ) continue;
+
+                if ( board[0, column] == middleField && board[2, column] == middleField )
+                {
+                    WinColumn = true;
+                    break;
+                }
+            }
+        }
+
+        private void CheckDiagonals ( )
+        {
+            var middleField = board[1 , 1];
+            if ( middleField != BoardPiece.Empty )
+            {
+                if ( board[1 , 1] == middleField && board[2 , 2] == middleField )
+                {
+                    WinDiagonal = true;
+                }
+                else if ( board[0 , 2] == middleField && board[2 , 0] == middleField )
+                {
+                    WinDiagonal = true;
+                }
+            }
         }
     }
 }

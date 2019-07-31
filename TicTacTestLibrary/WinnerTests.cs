@@ -6,6 +6,17 @@ namespace TicTacTestLibrary
 {
     public class WinnerTests
     {
+        private readonly Player player;
+        private readonly Move nextMove;
+        private readonly WinCalculator winCal;
+
+        public WinnerTests()
+        {
+            player = new Player();
+            nextMove = new Move();
+            winCal = new WinCalculator();
+        }
+
         [Fact]
         public void GivenColumnWin_ReturnWinnerTrue ()
         {
@@ -16,11 +27,7 @@ namespace TicTacTestLibrary
                 { BoardPiece.X, BoardPiece.Empty, BoardPiece.Empty }
             };
 
-            var player = new Player() { Character = BoardPiece.X };
-            var nextMove = new Move() { Row = 1 , Column = 1 };
-
-            WinCalculator winCal = new WinCalculator();
-            winCal.WinnerCalculator( player , currentBoard , nextMove );
+            winCal.WinnerCalculator(currentBoard  );
 
             Assert.True( winCal.IsWinner );
         }
@@ -35,11 +42,7 @@ namespace TicTacTestLibrary
                 { BoardPiece.Empty, BoardPiece.Empty, BoardPiece.Empty }
             };
 
-            var player = new Player() { Character = BoardPiece.X };
-            var nextMove = new Move() { Row = 1 , Column = 1 };
-
-            WinCalculator winCal = new WinCalculator();
-            winCal.WinnerCalculator( player , currentBoard , nextMove );
+            winCal.WinnerCalculator(currentBoard);
 
             Assert.True( winCal.IsWinner );
         }
@@ -54,11 +57,7 @@ namespace TicTacTestLibrary
                 { BoardPiece.Empty, BoardPiece.Empty, BoardPiece.X }
             };
 
-            var player = new Player() { Character = BoardPiece.X };
-            var nextMove = new Move() { Row = 1 , Column = 1 };
-
-            WinCalculator winCal = new WinCalculator();
-            winCal.WinnerCalculator( player , currentBoard , nextMove );
+            winCal.WinnerCalculator( currentBoard  );
 
             Assert.True( winCal.IsWinner );
         }
@@ -73,17 +72,13 @@ namespace TicTacTestLibrary
                 { BoardPiece.X, BoardPiece.Empty, BoardPiece.O }
             };
 
-            var player = new Player() { Character = BoardPiece.X };
-            var nextMove = new Move() { Row = 1 , Column = 1 };
-
-            WinCalculator winCal = new WinCalculator();
-            winCal.WinnerCalculator( player , currentBoard , nextMove );
+            winCal.WinnerCalculator( currentBoard );
 
             Assert.True( winCal.IsWinner );
         }
 
         [Fact]
-        public void GivenFullBoard_ReturnWinnerIsEqualToFalse ()
+        public void GivenFullBoard_WhenNoWinner_ReturnWinnerIsEqualToFalse ()
         {
             var currentBoard = new BoardPiece[,]
             {
@@ -92,11 +87,7 @@ namespace TicTacTestLibrary
                 { BoardPiece.X, BoardPiece.O, BoardPiece.X }
             };
 
-            var player = new Player() { Character = BoardPiece.X };
-            var nextMove = new Move() { Row = 1 , Column = 1 };
-
-            WinCalculator winCal = new WinCalculator();
-            winCal.WinnerCalculator( player , currentBoard , nextMove );
+            winCal.WinnerCalculator(currentBoard );
 
             Assert.False( winCal.IsWinner );
         }
@@ -111,11 +102,7 @@ namespace TicTacTestLibrary
                 { BoardPiece.Empty, BoardPiece.Empty, BoardPiece.Empty }
             };
 
-            var player = new Player() { Character = BoardPiece.X };
-            var nextMove = new Move() { Row = 1 , Column = 1 };
-
-            WinCalculator winCal = new WinCalculator();
-            winCal.WinnerCalculator( player , currentBoard , nextMove );
+            winCal.WinnerCalculator(currentBoard );
 
             Assert.False( winCal.IsWinner );
         }
