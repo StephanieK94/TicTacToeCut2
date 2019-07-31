@@ -8,34 +8,37 @@ namespace TicTacTestLibrary
 {
     public class GameTests
     {
-        [Fact]
-        public void GivenNewGame_ReturnsEmptyGameboard ()
+        private readonly NewGame newGame;
+
+        public GameTests()
         {
-            NewGame game = new NewGame();
+            newGame = new NewGame();
+        }
+
+        [Fact]
+        public void GivenANewGame_ReturnsEmptyGameboard ()
+        {
             var expectedGameboard = new BoardPiece[,] {
                 { BoardPiece.Empty, BoardPiece.Empty, BoardPiece.Empty } ,
                 { BoardPiece.Empty , BoardPiece.Empty , BoardPiece.Empty } ,
                 { BoardPiece.Empty , BoardPiece.Empty , BoardPiece.Empty } };
 
-            Assert.Equal( expectedGameboard , game.board.board );
+            Assert.Equal( expectedGameboard , newGame.board.layout );
         }
 
         [Fact]
-        public void GivenNewGame_ReturnsCurrentPlayerX()
+        public void GivenANewGame_ReturnsTheCurrentPlayerAsX()
         {
-            NewGame game = new NewGame();
             var expectedStartPlayer = BoardPiece.X;
 
-            Assert.Equal( expectedStartPlayer , game.currentPlayer.Character );
+            Assert.Equal( expectedStartPlayer , newGame.currentPlayer.Character );
         }
 
         [Fact]
-        public void GivenNewGame_ReturnsnextMoveAsZero()
+        public void GivenANewGame_ReturnsTheNextMoveSetToZero()
         {
-            NewGame game = new NewGame();
-
-            Assert.Equal( 0 , game.nextMove.Row );
-            Assert.Equal( 0 , game.nextMove.Column );
+            Assert.Equal( 0 , newGame.nextMove.Row );
+            Assert.Equal( 0 , newGame.nextMove.Column );
         }
     }
 }

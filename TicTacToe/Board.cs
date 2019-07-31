@@ -6,7 +6,7 @@ namespace TicTacToe
     {
         private BoardPiece[,] _board;
 
-        public BoardPiece[,] board
+        public BoardPiece[,] layout
         {
             get { return _board; }
             set { _board = value; }
@@ -14,7 +14,7 @@ namespace TicTacToe
 
         public Board ()
         {
-            board = new BoardPiece[,] {
+            layout = new BoardPiece[,] {
                 { BoardPiece.Empty, BoardPiece.Empty, BoardPiece.Empty } ,
                 { BoardPiece.Empty , BoardPiece.Empty , BoardPiece.Empty } ,
                 { BoardPiece.Empty , BoardPiece.Empty , BoardPiece.Empty } };
@@ -22,12 +22,12 @@ namespace TicTacToe
 
         public void PlayMoveOnBoard(Player currentPlayer, Move currentMove)
         {
-            this.board[currentMove.Row , currentMove.Column] = currentPlayer.Character;
+            this.layout[currentMove.Row , currentMove.Column] = currentPlayer.Character;
         }
 
         public bool VaidatePositionIsEmpty(Move currentMove)
         {
-            if ( this.board[currentMove.Row, currentMove.Column] == BoardPiece.Empty ) return true;
+            if ( this.layout[currentMove.Row, currentMove.Column] == BoardPiece.Empty ) return true;
             return false;
         }
 
@@ -39,8 +39,8 @@ namespace TicTacToe
 
                 for ( var column = 0 ; column < 3 ; column++ )
                 {
-                    if ( this.board[row , column] == BoardPiece.Empty ) Console.Write( " * " );
-                    else Console.Write( $" {this.board[row , column]} " );
+                    if ( this.layout[row , column] == BoardPiece.Empty ) Console.Write( " * " );
+                    else Console.Write( $" {this.layout[row , column]} " );
                 }
 
                 Console.WriteLine( "" );

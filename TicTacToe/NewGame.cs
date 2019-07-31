@@ -60,7 +60,7 @@ namespace TicTacToe
                     goto Prompt;
             }
 
-            winCal.WinnerCalculator( currentPlayer , board.board , nextMove );
+            winCal.WinnerCalculator( currentPlayer , board.layout , nextMove );
             turnCount++;
 
             if(winCal.IsWinner == false && turnCount < 9)
