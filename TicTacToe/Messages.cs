@@ -22,7 +22,7 @@ namespace TicTacToe
             return new string( $"\nPlayer {(int) currentPlayer.Character} enter a coord x,y to place your {currentPlayer.Character}: " );
         }
 
-        public string PrintWinner(Player player)
+        public string ReturnWinner(Player player)
         {
             return new string( $"\nWell done {player.Character}, you won the game!\n" );
         }

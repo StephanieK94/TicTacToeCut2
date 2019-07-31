@@ -14,8 +14,7 @@ namespace TicTacToe
         }
 
         public Board board = new Board();
-        public Player currentPlayer = new Player();
-        public Move nextMove = new Move();
+        public Player player = new Player();
         public Messages messages = new Messages();
 
         public void StartGame() 
@@ -24,34 +23,34 @@ namespace TicTacToe
             board.PrintBoard();
 
             Prompt:
-            messages.PrintToConsole( messages.PromptForMove( currentPlayer ) );
+            messages.PrintToConsole( messages.PromptForMove( player ) );
 
             var playerInput = GetInput();
             WinCalculator winCal = new WinCalculator();
 
-            if ( nextMove.CheckForForfeit( playerInput ) == true )
+            if ( player.LastMove.CheckForForfeit( playerInput ) == true )
             {
-                currentPlayer.ChangePlayer();
+                player.ChangePlayer();
                 winCal.IsWinner = true;
                 goto EndGame;
             }
 
-            if ( nextMove.ConvertPlayerInputToMove( playerInput ) == false )
+            if ( player.LastMove.ConvertPlayerInputToMove( playerInput ) == false )
             {
                 messages.PrintToConsole( messages.dictionary["InvalidInput"] );
                 goto Prompt;
             }
 
-            if ( nextMove.ValidatePlayerMoves( nextMove ) == false)
+            if ( player.LastMove.ValidatePlayerMoves( player.LastMove ) == false)
             {
                 messages.PrintToConsole( messages.dictionary["OutOfBound"] );
                 goto Prompt;
             }
 
-            switch( board.VaidatePositionIsEmpty(nextMove))
+            switch( board.VaidatePositionIsEmpty( player.LastMove ) )
             {
                 case true:
-                    board.PlayMoveOnBoard( currentPlayer , nextMove );
+                    board.PlayMoveOnBoard( player , player.LastMove );
                     messages.PrintToConsole( messages.dictionary["AcceptedMove"] );
                     board.PrintBoard();
                     break;
@@ -60,18 +59,18 @@ namespace TicTacToe
                     goto Prompt;
             }
 
-            winCal.WinnerCalculator( currentPlayer , board.layout , nextMove );
+            winCal.WinnerCalculator( board.layout);
             turnCount++;
 
             if(winCal.IsWinner == false && turnCount < 9)
             {
-                currentPlayer.ChangePlayer();
+                player.ChangePlayer();
                 goto Prompt;
             }
 
             EndGame:
             if ( winCal.IsWinner == false ) messages.PrintToConsole( messages.dictionary["ResultWasDraw"]);
-            else messages.PrintToConsole( messages.PrintWinner( currentPlayer )) ;
+            else messages.PrintToConsole( messages.ReturnWinner( player )) ;
         }
 
         public bool PromptForNewGame ()
