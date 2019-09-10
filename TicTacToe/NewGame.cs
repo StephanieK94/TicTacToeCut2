@@ -47,7 +47,7 @@ namespace TicTacToe
                 goto Prompt;
             }
 
-            switch( board.VaidatePositionIsEmpty( player.LastMove ) )
+            switch( board.ValidatePositionIsEmpty( player.LastMove ) )
             {
                 case true:
                     board.PlayMoveOnBoard( player , player.LastMove );
