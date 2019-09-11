@@ -8,74 +8,74 @@ namespace TicTacToe
     {
         public int TurnCount { get; set; }
 
-        public Board board = new Board();
-        public Player player = new Player();
-        public Messages messages = new Messages();
+        public Board Board = new Board();
+        public Player Player = new Player();
+        public MessageProcessor Message = new MessageProcessor();
 
         public void StartGame() 
         {
-            messages.PrintToConsole(messages.dictionary["Welcome"]);
-            board.PrintBoard();
+            Message.PrintToConsole(Message.Dictionary["Welcome"]);
+            Board.PrintBoard();
 
             Prompt:
-            messages.PrintToConsole( messages.PromptForMove( player ) );
+            Message.PrintToConsole( Message.PromptForMove( Player ) );
 
             var playerInput = GetInput();
-            WinCalculator winCal = new WinCalculator();
+            var winCal = new WinCalculator();
 
-            if ( player.LastMove.CheckForForfeit( playerInput ) == true )
+            if ( Player.LastMove.CheckForForfeit( playerInput ) == true )
             {
-                player.ChangePlayer();
+                Player.ChangePlayer();
                 winCal.IsWinner = true;
                 goto EndGame;
             }
 
-            if ( player.LastMove.ConvertPlayerInputToMove( playerInput ) == false )
+            if ( Player.LastMove.ConvertPlayerInputToMove( playerInput ) == false )
             {
-                messages.PrintToConsole( messages.dictionary["InvalidInput"] );
+                Message.PrintToConsole( Message.Dictionary["InvalidInput"] );
                 goto Prompt;
             }
 
-            if ( player.LastMove.ValidatePlayerMoves( player.LastMove ) == false)
+            if ( Player.LastMove.ValidatePlayerMoves( Player.LastMove ) == false)
             {
-                messages.PrintToConsole( messages.dictionary["OutOfBound"] );
+                Message.PrintToConsole( Message.Dictionary["OutOfBound"] );
                 goto Prompt;
             }
 
-            switch( board.ValidatePositionIsEmpty( player.LastMove ) )
+            switch( Board.ValidatePositionIsEmpty( Player.LastMove ) )
             {
                 case true:
-                    board.PlayMoveOnBoard( player , player.LastMove );
-                    messages.PrintToConsole( messages.dictionary["AcceptedMove"] );
-                    board.PrintBoard();
+                    Board.PlayMoveOnBoard( Player , Player.LastMove );
+                    Message.PrintToConsole( Message.Dictionary["AcceptedMove"] );
+                    Board.PrintBoard();
                     break;
                 default:
-                    messages.PrintToConsole( messages.dictionary["InvalidMove"] );
+                    Message.PrintToConsole( Message.Dictionary["InvalidMove"] );
                     goto Prompt;
             }
 
-            winCal.WinnerCalculator( board.Layout);
+            winCal.WinnerCalculator( Board.Layout);
             TurnCount++;
 
             if(winCal.IsWinner == false && TurnCount < 9)
             {
-                player.ChangePlayer();
+                Player.ChangePlayer();
                 goto Prompt;
             }
 
             EndGame:
-            if ( winCal.IsWinner == false ) messages.PrintToConsole( messages.dictionary["ResultWasDraw"]);
-            else messages.PrintToConsole( messages.ReturnWinner( player )) ;
+            Message.PrintToConsole(winCal.IsWinner == false
+                ? Message.Dictionary["ResultWasDraw"]
+                : Message.ReturnWinner(Player));
         }
 
         public bool PromptForNewGame ()
         {
-            messages.PrintToConsole( messages.dictionary["PromptForNewGame"] );
+            Message.PrintToConsole( Message.Dictionary["PromptForNewGame"] );
 
             var playAgain = GetInput();
 
-            if ( playAgain.Contains( "Y".ToLower() )) return true;
-            return false;
+            return playAgain.Contains( "Y".ToLower() );
         }
 
         public string GetInput()

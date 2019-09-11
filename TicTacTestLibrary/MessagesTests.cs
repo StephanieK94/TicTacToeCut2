@@ -18,8 +18,8 @@ namespace TicTacTestLibrary
         [Fact]
         public void GivenPlayerSetAsX_WhenPromptForMoveCalled_ReturnsXAsNumberAndCharacterInMessage ()
         {
-            var expectedMessage = "\nPlayer 1 enter a coord x,y to place your X: ";
-            var actualMessage = _game.messages.PromptForMove( _game.player );
+            var expectedMessage = "\nPlayer 1 enter a coordinate x,y to place your X: ";
+            var actualMessage = _game.MessageProcessor.PromptForMove( _game.Player );
 
             Assert.Equal( expectedMessage , actualMessage );
         }
@@ -27,7 +27,7 @@ namespace TicTacTestLibrary
         [Fact]
         public void GivenANewGame_WhenPrintWinnerIsCalled_ReturnsXAsWinner()
         {
-            var actualMessage = _game.messages.ReturnWinner( _game.player );
+            var actualMessage = _game.MessageProcessor.ReturnWinner( _game.Player );
             var expectedMessage = "\nWell done X, you won the game!\n";
 
             Assert.Equal( expectedMessage , actualMessage );

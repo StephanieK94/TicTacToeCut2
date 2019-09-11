@@ -23,7 +23,7 @@ namespace TicTacTestLibrary
                 { BoardPiece.None , BoardPiece.None , BoardPiece.None } ,
                 { BoardPiece.None , BoardPiece.None , BoardPiece.None } };
 
-            Assert.Equal( expectedGameBoard , _newGame.board.Layout );
+            Assert.Equal( expectedGameBoard , _newGame.Board.Layout );
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace TicTacTestLibrary
         {
             var expectedStartPlayer = BoardPiece.X;
 
-            Assert.Equal( expectedStartPlayer , _newGame.player.Character );
+            Assert.Equal( expectedStartPlayer , _newGame.Player.Character );
         }
     }
 }
