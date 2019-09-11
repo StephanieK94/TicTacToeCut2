@@ -6,12 +6,7 @@ namespace TicTacToe
 {
     public class NewGame
     {
-        private int _turnCount;
-        public int turnCount
-        {
-            get { return _turnCount; }
-            set { _turnCount = value; }
-        }
+        public int TurnCount { get; set; }
 
         public Board board = new Board();
         public Player player = new Player();
@@ -59,10 +54,10 @@ namespace TicTacToe
                     goto Prompt;
             }
 
-            winCal.WinnerCalculator( board.layout);
-            turnCount++;
+            winCal.WinnerCalculator( board.Layout);
+            TurnCount++;
 
-            if(winCal.IsWinner == false && turnCount < 9)
+            if(winCal.IsWinner == false && TurnCount < 9)
             {
                 player.ChangePlayer();
                 goto Prompt;

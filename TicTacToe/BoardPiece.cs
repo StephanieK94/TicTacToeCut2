@@ -6,8 +6,8 @@ namespace TicTacToe
 {
     public enum BoardPiece
     {
-        Empty = 0,
-        X = 1,
-        O = 2,
+        None,
+        X,
+        O,
     }
 }

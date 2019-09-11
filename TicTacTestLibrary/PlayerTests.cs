@@ -8,29 +8,29 @@ namespace TicTacTestLibrary
 {
     public class PlayerTests
     {
-        private readonly Player player;
+        private readonly Player _player;
 
         public PlayerTests()
         {
-            player = new Player();
+            _player = new Player();
         }
 
         [Fact]
         public void GivenNewPlayer_ReturnsDefaultCharacterAsX()
         {
-            Assert.Equal(BoardPiece.X, player.Character);
+            Assert.Equal(BoardPiece.X, _player.Character);
         }
 
         [Theory]
         [InlineData(BoardPiece.X, BoardPiece.O)]
         [InlineData(BoardPiece.O, BoardPiece.X)]
-        [InlineData(BoardPiece.Empty, BoardPiece.X)]
+        [InlineData(BoardPiece.None, BoardPiece.X)]
         public void GivenCurrentPlayer_WhenChangedPlayerCalled_ReturnExpectedPlayer(BoardPiece currentPlayer, BoardPiece expectedPlayer)
         {
-            player.Character = currentPlayer;
-            player.ChangePlayer();
+            _player.Character = currentPlayer;
+            _player.ChangePlayer();
 
-            Assert.Equal(expectedPlayer, player.Character);
+            Assert.Equal(expectedPlayer, _player.Character);
         }
     }
 }

@@ -1,29 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using TicTacToe;
+using System;
 
 namespace TicTacTestLibrary
 {
     public class GameTests
     {
-        private readonly NewGame newGame;
+        private readonly NewGame _newGame;
 
         public GameTests()
         {
-            newGame = new NewGame();
+            _newGame = new NewGame();
         }
 
         [Fact]
-        public void GivenANewGame_ReturnsEmptyGameboard ()
+        public void GivenANewGame_ReturnsEmptyGameBoard ()
         {
-            var expectedGameboard = new BoardPiece[,] {
-                { BoardPiece.Empty, BoardPiece.Empty, BoardPiece.Empty } ,
-                { BoardPiece.Empty , BoardPiece.Empty , BoardPiece.Empty } ,
-                { BoardPiece.Empty , BoardPiece.Empty , BoardPiece.Empty } };
+            var expectedGameBoard = new BoardPiece[,] {
+                { BoardPiece.None, BoardPiece.None, BoardPiece.None } ,
+                { BoardPiece.None , BoardPiece.None , BoardPiece.None } ,
+                { BoardPiece.None , BoardPiece.None , BoardPiece.None } };
 
-            Assert.Equal( expectedGameboard , newGame.board.layout );
+            Assert.Equal( expectedGameBoard , _newGame.board.Layout );
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace TicTacTestLibrary
         {
             var expectedStartPlayer = BoardPiece.X;
 
-            Assert.Equal( expectedStartPlayer , newGame.player.Character );
+            Assert.Equal( expectedStartPlayer , _newGame.player.Character );
         }
     }
 }

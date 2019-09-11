@@ -10,14 +10,14 @@ namespace TicTacToe
         private int _column;
         public int Row
         {
-            get { return _row; }
-            set { _row = value - 1; }
+            get => _row;
+            set => _row = value - 1;
         }
 
         public int Column
         {
-            get { return _column; }
-            set { _column = value - 1; }
+            get => _column;
+            set => _column = value - 1;
         }
 
         public bool ConvertPlayerInputToMove(string userString)

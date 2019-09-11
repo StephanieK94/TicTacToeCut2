@@ -8,11 +8,11 @@ namespace TicTacTestLibrary
 {
     public class MoveTests
     {
-        private readonly Move nextMove;
+        private readonly Move _nextMove;
 
         public MoveTests()
         {
-            nextMove = new Move();
+            _nextMove = new Move();
         }
 
         [Theory]
@@ -24,10 +24,10 @@ namespace TicTacTestLibrary
         [InlineData( -1 , -1 , false )]
         public void GivenInput_WhenValidationForRangeCalled_ReturnsExpectedResult(int row, int column, bool expectedResult)
         {
-            nextMove.Row = row;
-            nextMove.Column = column;
+            _nextMove.Row = row;
+            _nextMove.Column = column;
 
-            var actual = nextMove.ValidatePlayerMoves( nextMove );
+            var actual = _nextMove.ValidatePlayerMoves( _nextMove );
 
             Assert.Equal(expectedResult, actual);
         }
@@ -39,7 +39,7 @@ namespace TicTacTestLibrary
         [InlineData( "1,P", false)]
         public void GivenInput_WhenCheckForForfeit_ReturnsExpectedOutput(string input, bool output)
         {
-            bool playerForfeits = nextMove.CheckForForfeit( input );
+            var playerForfeits = _nextMove.CheckForForfeit( input );
 
             Assert.Equal( output, playerForfeits );
         }
@@ -49,7 +49,7 @@ namespace TicTacTestLibrary
         {
             var input = ",1";
 
-            var isValidInput = nextMove.ConvertPlayerInputToMove( input );
+            var isValidInput = _nextMove.ConvertPlayerInputToMove( input );
 
             Assert.False( isValidInput );
         }

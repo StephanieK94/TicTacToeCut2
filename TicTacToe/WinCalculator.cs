@@ -6,12 +6,7 @@ namespace TicTacToe
 {
     public class WinCalculator
     {
-        private BoardPiece[,] _board;
-        public BoardPiece[,] board
-        {
-            get { return _board; }
-            set { _board = value; }
-        }
+        public BoardPiece[,] Board { get; set; }
 
         private bool WinRow { get; set; }
         private bool WinColumn { get; set; }
@@ -22,7 +17,7 @@ namespace TicTacToe
 
         public void WinnerCalculator ( BoardPiece[,] currentBoard )
         {
-            board = currentBoard;
+            Board = currentBoard;
 
             WinRow = false;
             WinColumn = false;
@@ -42,10 +37,10 @@ namespace TicTacToe
         {
             for(var row =0 ; row <=2 ; row++ )
             {
-                var middleField = board[row , 1];
-                if ( middleField == BoardPiece.Empty ) continue;
+                var middleField = Board[row , 1];
+                if ( middleField == BoardPiece.None ) continue;
 
-                if ( board[row , 0] == middleField && board[row , 2] == middleField )
+                if ( Board[row , 0] == middleField && Board[row , 2] == middleField )
                 {
                     WinRow = true;
                     break;
@@ -57,10 +52,10 @@ namespace TicTacToe
         {
             for ( var column = 0 ; column <= 2 ; column++ )
             {
-                var middleField = board[1, column];
-                if ( middleField == BoardPiece.Empty ) continue;
+                var middleField = Board[1, column];
+                if ( middleField == BoardPiece.None ) continue;
 
-                if ( board[0, column] == middleField && board[2, column] == middleField )
+                if ( Board[0, column] == middleField && Board[2, column] == middleField )
                 {
                     WinColumn = true;
                     break;
@@ -70,14 +65,14 @@ namespace TicTacToe
 
         private void CheckDiagonals ( )
         {
-            var middleField = board[1 , 1];
-            if ( middleField != BoardPiece.Empty )
+            var middleField = Board[1 , 1];
+            if ( middleField != BoardPiece.None )
             {
-                if ( board[1 , 1] == middleField && board[2 , 2] == middleField )
+                if ( Board[1 , 1] == middleField && Board[2 , 2] == middleField )
                 {
                     WinDiagonal = true;
                 }
-                else if ( board[0 , 2] == middleField && board[2 , 0] == middleField )
+                else if ( Board[0 , 2] == middleField && Board[2 , 0] == middleField )
                 {
                     WinDiagonal = true;
                 }

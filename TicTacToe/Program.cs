@@ -7,7 +7,7 @@ namespace TicTacToe
         static void Main(string[] args)
         {
             StartNewGame:
-            NewGame game = new NewGame();
+            var game = new NewGame();
 
             game.StartGame();
 

@@ -6,15 +6,15 @@ namespace TicTacTestLibrary
 {
     public class WinnerTests
     {
-        private readonly Player player;
-        private readonly Move nextMove;
-        private readonly WinCalculator winCal;
+        private readonly Player _player;
+        private readonly Move _nextMove;
+        private readonly WinCalculator _winCal;
 
         public WinnerTests()
         {
-            player = new Player();
-            nextMove = new Move();
-            winCal = new WinCalculator();
+            _player = new Player();
+            _nextMove = new Move();
+            _winCal = new WinCalculator();
         }
 
         [Fact]
@@ -22,14 +22,14 @@ namespace TicTacTestLibrary
         {
             var currentBoard = new BoardPiece[,]
             {
-                { BoardPiece.X, BoardPiece.Empty, BoardPiece.Empty },
-                { BoardPiece.X, BoardPiece.Empty, BoardPiece.Empty },
-                { BoardPiece.X, BoardPiece.Empty, BoardPiece.Empty }
+                { BoardPiece.X, BoardPiece.None, BoardPiece.None },
+                { BoardPiece.X, BoardPiece.None, BoardPiece.None },
+                { BoardPiece.X, BoardPiece.None, BoardPiece.None }
             };
 
-            winCal.WinnerCalculator(currentBoard  );
+            _winCal.WinnerCalculator(currentBoard  );
 
-            Assert.True( winCal.IsWinner );
+            Assert.True( _winCal.IsWinner );
         }
 
         [Fact]
@@ -38,13 +38,13 @@ namespace TicTacTestLibrary
             var currentBoard = new BoardPiece[,]
             {
                 { BoardPiece.X, BoardPiece.X, BoardPiece.X },
-                { BoardPiece.Empty, BoardPiece.Empty, BoardPiece.Empty },
-                { BoardPiece.Empty, BoardPiece.Empty, BoardPiece.Empty }
+                { BoardPiece.None, BoardPiece.None, BoardPiece.None },
+                { BoardPiece.None, BoardPiece.None, BoardPiece.None }
             };
 
-            winCal.WinnerCalculator(currentBoard);
+            _winCal.WinnerCalculator(currentBoard);
 
-            Assert.True( winCal.IsWinner );
+            Assert.True( _winCal.IsWinner );
         }
 
         [Fact]
@@ -52,14 +52,14 @@ namespace TicTacTestLibrary
         {
             var currentBoard = new BoardPiece[,]
             {
-                { BoardPiece.X, BoardPiece.Empty, BoardPiece.Empty },
-                { BoardPiece.Empty, BoardPiece.X, BoardPiece.Empty },
-                { BoardPiece.Empty, BoardPiece.Empty, BoardPiece.X }
+                { BoardPiece.X, BoardPiece.None, BoardPiece.None },
+                { BoardPiece.None, BoardPiece.X, BoardPiece.None },
+                { BoardPiece.None, BoardPiece.None, BoardPiece.X }
             };
 
-            winCal.WinnerCalculator( currentBoard  );
+            _winCal.WinnerCalculator( currentBoard  );
 
-            Assert.True( winCal.IsWinner );
+            Assert.True( _winCal.IsWinner );
         }
 
         [Fact]
@@ -69,12 +69,12 @@ namespace TicTacTestLibrary
             {
                 { BoardPiece.X, BoardPiece.O, BoardPiece.X },
                 { BoardPiece.O, BoardPiece.X, BoardPiece.O },
-                { BoardPiece.X, BoardPiece.Empty, BoardPiece.O }
+                { BoardPiece.X, BoardPiece.None, BoardPiece.O }
             };
 
-            winCal.WinnerCalculator( currentBoard );
+            _winCal.WinnerCalculator( currentBoard );
 
-            Assert.True( winCal.IsWinner );
+            Assert.True( _winCal.IsWinner );
         }
 
         [Fact]
@@ -87,9 +87,9 @@ namespace TicTacTestLibrary
                 { BoardPiece.X, BoardPiece.O, BoardPiece.X }
             };
 
-            winCal.WinnerCalculator(currentBoard );
+            _winCal.WinnerCalculator(currentBoard );
 
-            Assert.False( winCal.IsWinner );
+            Assert.False( _winCal.IsWinner );
         }
 
         [Fact]
@@ -97,14 +97,14 @@ namespace TicTacTestLibrary
         {
             var currentBoard = new BoardPiece[,]
             {
-                { BoardPiece.X, BoardPiece.Empty, BoardPiece.Empty },
-                { BoardPiece.Empty, BoardPiece.Empty, BoardPiece.Empty },
-                { BoardPiece.Empty, BoardPiece.Empty, BoardPiece.Empty }
+                { BoardPiece.X, BoardPiece.None, BoardPiece.None },
+                { BoardPiece.None, BoardPiece.None, BoardPiece.None },
+                { BoardPiece.None, BoardPiece.None, BoardPiece.None }
             };
 
-            winCal.WinnerCalculator(currentBoard );
+            _winCal.WinnerCalculator(currentBoard );
 
-            Assert.False( winCal.IsWinner );
+            Assert.False( _winCal.IsWinner );
         }
     }
 }
