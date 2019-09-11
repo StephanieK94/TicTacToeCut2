@@ -18,7 +18,7 @@ namespace TicTacToe
             Board.PrintBoard();
 
             Prompt:
-            Message.PrintToConsole( Message.PromptForMove( Player ) );
+            Message.PrintToConsole( Message.PromptForMove( Player.Character ) );
 
             var playerInput = GetInput();
             var winCal = new WinCalculator();
@@ -66,7 +66,7 @@ namespace TicTacToe
             EndGame:
             Message.PrintToConsole(winCal.IsWinner == false
                 ? Message.Dictionary["ResultWasDraw"]
-                : Message.ReturnWinner(Player));
+                : Message.ReturnWinner(Player.Character));
         }
 
         public bool PromptForNewGame ()

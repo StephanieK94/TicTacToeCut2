@@ -2,7 +2,7 @@
 
 namespace TicTacToe
 {
-    public class Board
+    public class Board : IBoard
     {
         public BoardPiece[,] Layout { get; set; }
 

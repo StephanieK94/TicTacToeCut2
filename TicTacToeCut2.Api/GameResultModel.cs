@@ -4,8 +4,8 @@ namespace TicTacToeCut2.Api
 {
     public class GameResultModel
     {
-        public string[] board { get; set; }
-        public List<PlayerModel> players { get; set; }
-        public string gameState { get; set; }
+        public string[] Board { get; set; }
+        public List<PlayerModel> Players { get; set; }
+        public string GameState { get; set; }
     }
 }

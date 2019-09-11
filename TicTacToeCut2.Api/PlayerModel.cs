@@ -2,6 +2,6 @@
 {
     public class PlayerModel
     {
-        public string piece { get; set; }
+        public string Piece { get; set; }
     }
 }
