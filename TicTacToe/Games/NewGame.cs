@@ -5,18 +5,14 @@ using TicTacToe.Players;
 
 namespace TicTacToe.Games
 {
-    public interface INewGame
-    {
-        void StartGame();
-    }
-
     public class NewGame : INewGame
     {
         public int TurnCount { get; set; }
 
-        public Board Board = new Board();
-        public Player Player = new Player();
-        public MessageProcessor Message = new MessageProcessor();
+        public Board Board = Factory.CreateConsoleBoard();
+        public Player Player = Factory.CreateConsolePlayer();
+        public MessageProcessor Message = Factory.CreateConsoleMsgProcessor();
+        public WinCalculator WinCal = Factory.CreateConsoleWinCalculator();
 
         public void StartGame() 
         {
@@ -27,12 +23,11 @@ namespace TicTacToe.Games
             Message.PrintToConsole( Message.PromptForMove( Player.Character ) );
 
             var playerInput = GetInput();
-            var winCal = new WinCalculator();
 
             if ( Player.LastMove.CheckForForfeit( playerInput ) == true )
             {
                 Player.ChangePlayer();
-                winCal.IsWinner = true;
+                WinCal.IsWinner = true;
                 goto EndGame;
             }
 
@@ -60,17 +55,17 @@ namespace TicTacToe.Games
                     goto Prompt;
             }
 
-            winCal.WinnerCalculator( Board.Layout);
+            WinCal.WinnerCalculator( Board.Layout);
             TurnCount++;
 
-            if(winCal.IsWinner == false && TurnCount < 9)
+            if(WinCal.IsWinner == false && TurnCount < 9)
             {
                 Player.ChangePlayer();
                 goto Prompt;
             }
 
             EndGame:
-            Message.PrintToConsole(winCal.IsWinner == false
+            Message.PrintToConsole(WinCal.IsWinner == false
                 ? Message.MsgDictionary["ResultWasDraw"]
                 : Message.ReturnWinner(Player.Character.ToString()));
         }
