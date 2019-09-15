@@ -4,6 +4,7 @@ using Xunit;
 using TicTacToe;
 using System;
 using TicTacToe.Games;
+using TicTacToe.Players;
 
 namespace TicTacTestLibrary
 {
@@ -32,7 +33,7 @@ namespace TicTacTestLibrary
         {
             var expectedStartPlayer = BoardPiece.X;
 
-            Assert.Equal( expectedStartPlayer , _newGame.Player.Character );
+            Assert.Equal( expectedStartPlayer , Factory.CreateConsolePlayer().Character );
         }
     }
 }
