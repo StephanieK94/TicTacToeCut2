@@ -4,7 +4,12 @@ using System.Text;
 
 namespace TicTacToe
 {
-    public class NewGame
+    public interface INewGame
+    {
+        void StartGame();
+    }
+
+    public class NewGame : INewGame
     {
         public int TurnCount { get; set; }
 
@@ -14,7 +19,7 @@ namespace TicTacToe
 
         public void StartGame() 
         {
-            Message.PrintToConsole(Message.Dictionary["Welcome"]);
+            Message.PrintToConsole(Message.MsgDictionary["Welcome"]);
             Board.PrintBoard();
 
             Prompt:
@@ -32,13 +37,13 @@ namespace TicTacToe
 
             if ( Player.LastMove.ConvertPlayerInputToMove( playerInput ) == false )
             {
-                Message.PrintToConsole( Message.Dictionary["InvalidInput"] );
+                Message.PrintToConsole( Message.MsgDictionary["InvalidInput"] );
                 goto Prompt;
             }
 
             if ( Player.LastMove.ValidatePlayerMoves( Player.LastMove ) == false)
             {
-                Message.PrintToConsole( Message.Dictionary["OutOfBound"] );
+                Message.PrintToConsole( Message.MsgDictionary["OutOfBound"] );
                 goto Prompt;
             }
 
@@ -46,11 +51,11 @@ namespace TicTacToe
             {
                 case true:
                     Board.PlayMoveOnBoard( Player , Player.LastMove );
-                    Message.PrintToConsole( Message.Dictionary["AcceptedMove"] );
+                    Message.PrintToConsole( Message.MsgDictionary["AcceptedMove"] );
                     Board.PrintBoard();
                     break;
                 default:
-                    Message.PrintToConsole( Message.Dictionary["InvalidMove"] );
+                    Message.PrintToConsole( Message.MsgDictionary["InvalidMove"] );
                     goto Prompt;
             }
 
@@ -65,13 +70,13 @@ namespace TicTacToe
 
             EndGame:
             Message.PrintToConsole(winCal.IsWinner == false
-                ? Message.Dictionary["ResultWasDraw"]
-                : Message.ReturnWinner(Player.Character));
+                ? Message.MsgDictionary["ResultWasDraw"]
+                : Message.ReturnWinner(Player.Character.ToString()));
         }
 
         public bool PromptForNewGame ()
         {
-            Message.PrintToConsole( Message.Dictionary["PromptForNewGame"] );
+            Message.PrintToConsole( Message.MsgDictionary["PromptForNewGame"] );
 
             var playAgain = GetInput();
 

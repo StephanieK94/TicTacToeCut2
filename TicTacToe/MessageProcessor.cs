@@ -4,12 +4,10 @@ using System.Text;
 
 namespace TicTacToe
 {
-    public class MessageProcessor
+    public class MessageProcessor : IMessageProcessor
     {
-        public Dictionary<string , string> Dictionary = new Dictionary<string , string>()
+        public Dictionary<string , string> MsgDictionary = new Dictionary<string , string>()
         {
-            { "Welcome", "Welcome to Tic Tac Toe!\n" + "Here's the current board:\n" },
-            { "ResultWasDraw", "\nIt was a Draw! Better luck next time. \n" },
             { "AcceptedMove", "\nMove accepted, here's the current board:\n" },
             { "OutOfBound", "\nOh no, your coordinates were out of the acceptable range. \nRows and Columns are 1,2, or 3 based on the board. Try again...\n"},
             { "InvalidMove",  "\nOh no, a piece is already in this place! Try again...\n" },
@@ -19,12 +17,22 @@ namespace TicTacToe
 
         public string PromptForMove(BoardPiece player)
         {
-            return new string( $"\nPlayer {player} enter a coordinate x,y to place your {player}: " );
+            return new string( $"\nPlayer {(int)player} enter a coordinate x,y to place your {player}: " );
         }
 
-        public string ReturnWinner(BoardPiece player)
+        public string PrintWelcome()
+        {
+            return new string( "Welcome to Tic Tac Toe!\n" + "Here's the current board:\n" );
+        }
+
+        public string ReturnWinner(string player)
         {
             return new string( $"\nWell done {player}, you won the game!\n" );
+        }
+
+        public string ReturnDraw()
+        {
+           return new string( "\nIt was a Draw! Better luck next time. \n" );
         }
 
         public void PrintToConsole(string message)

@@ -27,7 +27,7 @@ namespace TicTacTestLibrary
         [Fact]
         public void GivenANewGame_WhenPrintWinnerIsCalled_ReturnsXAsWinner()
         {
-            var actualMessage = _game.Message.ReturnWinner( _game.Player.Character );
+            var actualMessage = _game.Message.ReturnWinner( _game.Player.Character.ToString() );
             var expectedMessage = "\nWell done X, you won the game!\n";
 
             Assert.Equal( expectedMessage , actualMessage );

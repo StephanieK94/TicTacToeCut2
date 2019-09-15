@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TicTacToe
 {
-    public class WinCalculator : IWinCalculator
+    public class WinCalculator
     {
         public BoardPiece[,] Board { get; set; }
 
