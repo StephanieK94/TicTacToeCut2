@@ -3,6 +3,7 @@ using System.Text;
 using Xunit;
 using TicTacToe;
 using System;
+using TicTacToe.Games;
 
 namespace TicTacTestLibrary
 {

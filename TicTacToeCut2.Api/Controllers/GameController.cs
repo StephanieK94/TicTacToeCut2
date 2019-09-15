@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TicTacToe;
+using TicTacToe.Games;
 using TicTacToeCut2.Api;
 
 namespace TicTacToeCut2.Api.Controllers

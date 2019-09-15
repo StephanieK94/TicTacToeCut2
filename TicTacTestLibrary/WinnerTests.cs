@@ -1,5 +1,6 @@
 using System;
 using TicTacToe;
+using TicTacToe.Players;
 using Xunit;
 
 namespace TicTacTestLibrary

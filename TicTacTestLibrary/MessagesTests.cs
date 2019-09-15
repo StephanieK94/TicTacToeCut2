@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using TicTacToe;
+using TicTacToe.Games;
 using Xunit;
 
 namespace TicTacTestLibrary

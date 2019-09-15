@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using TicTacToe.Boards;
+using TicTacToe.Messages;
+using TicTacToe.Players;
 
-namespace TicTacToe
+namespace TicTacToe.Games
 {
     public interface INewGame
     {
