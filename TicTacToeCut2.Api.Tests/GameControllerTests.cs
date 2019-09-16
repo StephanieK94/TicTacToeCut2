@@ -7,9 +7,8 @@ using Xunit;
 
 namespace TicTacToeCut2.Api.Tests
 {
-    public class UnitTest1
+    public class GameControllerTests
     {
-        
         [Fact]
         public void GameController_ReturnsNewGame ()
         {
