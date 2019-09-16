@@ -28,5 +28,10 @@ namespace TicTacToe
         {
             return new WinCalculator();
         }
+
+        public static string[] CreateWebBoard()
+        {
+            return new string[9];
+        }
     }
 }
