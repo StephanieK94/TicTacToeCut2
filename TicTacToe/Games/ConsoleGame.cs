@@ -5,10 +5,9 @@ using TicTacToe.Players;
 
 namespace TicTacToe.Games
 {
-    public class NewGame : INewGame
+    public class ConsoleGame : IGame
     {
-        public int TurnCount { get; set; }
-
+        public int TurnCount { get; set; } = 0;
         public Board Board = Factory.CreateConsoleBoard();
         public Player Player = Factory.CreateConsolePlayer();
         public MessageProcessor Message = Factory.CreateConsoleMsgProcessor();

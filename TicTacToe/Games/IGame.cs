@@ -1,6 +1,6 @@
 ﻿namespace TicTacToe.Games
 {
-    public interface INewGame
+    public interface IGame
     {
         void StartGame();
     }

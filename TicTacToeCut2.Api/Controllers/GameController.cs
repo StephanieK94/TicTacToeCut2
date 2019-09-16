@@ -16,7 +16,7 @@ namespace TicTacToeCut2.Api.Controllers
     {
         public GameResultModel Get ()
         {
-            var game = new NewGame();
+            var game = new ConsoleGame();
 
             game.StartGame();
 

@@ -13,17 +13,17 @@ namespace TicTacToeCut2.Api.Tests
         public void GameController_ReturnsNewGame ()
         {
             var controller = new GameController();
-
             var result = controller.Get();
+
             var expected = new GameResultModel()
             {
-                board = new string[9],
-                players = new List<PlayerModel>
+                Board = new string[9],
+                Players = new List<PlayerModel>
                 {
-                    new PlayerModel{ piece = "x" },
-                    new PlayerModel{piece = "o"}
+                    new PlayerModel{ Piece = "X" },
+                    new PlayerModel{ Piece = "O" }
                 },
-                gameState = "New Game"
+                GameState = "New Game"
             };
 
             result.Should().BeEquivalentTo( expected );
