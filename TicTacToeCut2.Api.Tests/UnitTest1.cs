@@ -2,6 +2,7 @@ using FluentAssertions;
 using System;
 using System.Collections.Generic;
 using TicTacToeCut2.Api.Controllers;
+using TicTacToeCut2.Api.Models;
 using Xunit;
 
 namespace TicTacToeCut2.Api.Tests
@@ -9,7 +10,7 @@ namespace TicTacToeCut2.Api.Tests
     public class UnitTest1
     {
         
-        [Fact(Skip = "Haven't got to pass yet")]
+        [Fact]
         public void GameController_ReturnsNewGame ()
         {
             var controller = new GameController();
@@ -26,7 +27,7 @@ namespace TicTacToeCut2.Api.Tests
                 GameState = "New Game"
             };
 
-            result.Should().BeEquivalentTo( expected );
+            result.Should().BeEquivalentTo(expected);
         }
     }
 }

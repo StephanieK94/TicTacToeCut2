@@ -5,7 +5,7 @@ using TicTacToe.Players;
 
 namespace TicTacToe.Games
 {
-    public class ConsoleGame : IGame
+    public class ConsoleGame
     {
         public int TurnCount { get; set; } = 0;
         public Board Board = Factory.CreateConsoleBoard();

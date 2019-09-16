@@ -3,7 +3,7 @@ using TicTacToe.Players;
 
 namespace TicTacToe.Boards
 {
-    public class Board : IBoard
+    public class Board
     {
         public BoardPiece[,] Layout { get; set; }
 

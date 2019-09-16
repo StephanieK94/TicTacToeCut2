@@ -1,6 +1,6 @@
 ﻿namespace TicTacToe.Players
 {
-    public class Player : IPlayer
+    public class Player
     {
         public BoardPiece Character { get; set; }
 

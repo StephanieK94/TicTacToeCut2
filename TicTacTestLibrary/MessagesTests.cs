@@ -10,11 +10,11 @@ namespace TicTacTestLibrary
 {
     public class MessagesTests
     {
-        private readonly NewGame _game;
+        private readonly ConsoleGame _game;
 
         public MessagesTests()
         {
-            _game = new NewGame();
+            _game = new ConsoleGame();
         }
 
         [Fact]

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using TicTacToe;
 using TicTacToe.Games;
 using TicTacToeCut2.Api;
+using TicTacToeCut2.Api.Models;
 
 namespace TicTacToeCut2.Api.Controllers
 {
@@ -16,11 +17,8 @@ namespace TicTacToeCut2.Api.Controllers
     {
         public GameResultModel Get ()
         {
-            var game = new ConsoleGame();
-
-            game.StartGame();
-
-            return new GameResultModel();
+            var webGame = new WebGame();
+            return webGame.Game;
         }
     }
 }
