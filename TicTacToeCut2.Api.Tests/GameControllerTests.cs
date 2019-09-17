@@ -30,22 +30,38 @@ namespace TicTacToeCut2.Api.Tests
             result.Should().BeEquivalentTo(expected);
         }
 
+
         [Fact]
-        public void GameController_WhenPlaysMoveOf1_ReturnsChangedBoard()
+        public void GameController_WhenPlaysMoveOf1_ReturnsChangedBoard ()
         {
             var webGame = new WebGame();
-            var result = _controller.PlayMove(webGame, "X" , 1);
-            var expected = new string[9]{"X",null, null , null , null , null , null , null , null};
-            Assert.Equal(expected,result.Model.Board);
+            var result = _controller.PlayMove( webGame , "X" , 1 );
+            var expected = new string[9] { "X" , null , null , null , null , null , null , null , null };
+
+            Assert.Equal( expected , result.Model.Board );
         }
 
-        [Fact(Skip = "Haven't finished the response status codes")]
-        public void WhenInvalidMovePlayed_ReturnsGameStateAsInvalid()
+        // Should I add into the GameResultModel an extra player of the CurrentPlayer?
+        // How will I keep track of the Board and the current player?
+        //
+        [Fact( Skip = "Haven't decided how to note the current player or if need to switch them" )]
+        public void GameController_WhenPlaysMoveOf1_ReturnsChangedStateAndPlayer ()
+        {
+            var webGame = new WebGame();
+            var result = _controller.PlayMove( webGame , "X" , 1 );
+            var expected = new string[9] { "X" , null , null , null , null , null , null , null , null };
+
+            Assert.Equal( expected , result.Model.Board );
+        }
+
+        [Fact( Skip = "Haven't finished the response status codes" )]
+        public void WhenInvalidMovePlayed_ReturnsGameStateAsInvalid ()
         {
             var webGame = new WebGame();
             webGame.Model.Board = new string[9] { "X" , null , null , null , null , null , null , null , null };
             var result = _controller.PlayMove( webGame , "X" , 1 );
             var expected = "Invalid Move";
+
             Assert.Equal( expected , result.Model.State );
         }
     }

@@ -16,7 +16,7 @@ namespace TicTacToeCut2.Api.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        // GET api/values
+        // GET api/tictactoe
         [HttpGet]
         public GameResultModel GetNewGame ()
         {
@@ -32,12 +32,12 @@ namespace TicTacToeCut2.Api.Controllers
             return webGame.Model.Players;
         }
 
-        // POST api/tictactoe/players/{player}
+        // POST api/tictactoe/players/X/1
         [HttpPost( "/players/{player}/{move}" )]
         public WebGame PlayMove ( WebGame game , string playerPiece , int move )
         {
             move = move - 1;
-            if (game.Model.Board[move] != null)
+            if ( game.Model.Board[move] != null )
             {
                 game.Model.State = "Invalid Move";
 
@@ -45,8 +45,9 @@ namespace TicTacToeCut2.Api.Controllers
 
                 return game;
             }
-            //Response = the 200 response and the board changes
+            //Response = the 200 response and the board and state changes changes
             game.Model.Board[move] = playerPiece;
+            //game.Model.State = "Player O's turn"
             return game;
         }
     }
