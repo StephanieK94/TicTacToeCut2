@@ -15,10 +15,18 @@ namespace TicTacToeCut2.Api.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        public GameResultModel Get ()
+        [HttpGet]
+        public GameResultModel GetNewGame ()
         {
             var webGame = new WebGame();
             return webGame.Game;
         }
+
+        //[HttpPost]
+        //[Route("api/players/{playerPiece}/{move})]
+        //public GameResultModel PlayMove(string piece, int move)
+        //{
+        //    return new GameResultModel();
+        //}
     }
 }
