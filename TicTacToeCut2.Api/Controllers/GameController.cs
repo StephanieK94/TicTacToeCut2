@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using TicTacToe;
 using TicTacToe.Games;
@@ -38,9 +39,13 @@ namespace TicTacToeCut2.Api.Controllers
             move = move - 1;
             if (game.Game.Board[move] != null)
             {
-                game.Game.GameState = "Position Taken";
+                game.Game.GameState = "Invalid Move";
+
+                //Response = the 400 response and the gameState changes
+
                 return game;
             }
+            //Response = the 200 response and the board changes
             game.Game.Board[move] = playerPiece;
             return game;
         }

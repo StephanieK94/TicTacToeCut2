@@ -38,5 +38,15 @@ namespace TicTacToeCut2.Api.Tests
             var expected = new string[9]{"X",null, null , null , null , null , null , null , null};
             Assert.Equal(expected,result.Game.Board);
         }
+
+        [Fact(Skip = "Haven't finished the response status codes")]
+        public void WhenInvalidMovePlayed_ReturnsGameStateAsInvalid()
+        {
+            var webGame = new WebGame();
+            webGame.Game.Board = new string[9] { "X" , null , null , null , null , null , null , null , null };
+            var result = _controller.PlayMove( webGame , "X" , 1 );
+            var expected = "Invalid Move";
+            Assert.Equal( expected , result.Game.GameState );
+        }
     }
 }
