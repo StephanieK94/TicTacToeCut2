@@ -15,6 +15,7 @@ namespace TicTacToeCut2.Api.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
+        // GET api/values
         [HttpGet]
         public GameResultModel GetNewGame ()
         {
@@ -22,11 +23,19 @@ namespace TicTacToeCut2.Api.Controllers
             return webGame.Game;
         }
 
-        //[HttpPost]
-        //[Route("api/players/{playerPiece}/{move})]
-        //public GameResultModel PlayMove(string piece, int move)
+        // GET api/tictactoe/players
+        [HttpGet( "/players" )]
+        public List<PlayerModel> GetPlayersList ()
+        {
+            var webGame = new WebGame();
+            return webGame.Game.Players;
+        }
+
+        //// POST api/tictactoe/players/{player}
+        //[HttpPost("/players/{player}/{move}")]
+        //public WebGame PlayMove(string[] board, string playerPiece, int move)
         //{
-        //    return new GameResultModel();
+
         //}
     }
 }

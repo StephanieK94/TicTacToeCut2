@@ -44,7 +44,7 @@ namespace TicTacToeCut2.Api.Tests
                 GameState = "New Game"
             };
 
-            var move = 1;
+           // var move = 1;
 
             //var result = _controller.PlayMove(expected.Players[0].Piece, move);
         }

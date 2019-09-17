@@ -10,18 +10,19 @@ namespace TicTacToeCut2.Api.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
+        // GET api/tictactoe
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get ()
         {
             return new string[] { "value1" , "value2" };
         }
 
-        // GET api/values/5
-        [HttpGet( "{id}" )]
-        public ActionResult<string> Get ( int id )
+        // GET api/tictactoe/players
+        [HttpGet( "/players" )]
+        public List<PlayerModel> GetPlayersList ()
         {
-            return "value";
+            var webGame = new WebGame();
+            return webGame.Game.Players;
         }
 
         // POST api/values

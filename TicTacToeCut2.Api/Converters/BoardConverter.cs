@@ -9,31 +9,31 @@ namespace TicTacToeCut2.Api.Converters
 {
     public class BoardConverter
     {
-        public Board ConvertWebApiBoardToConsoleBoard(string[] webBoard)
+        public BoardPiece[,] ConvertWebApiBoardToConsoleBoard(string[] webBoard)
         {
-            var consoleBoard = new Board();
+            var consoleBoard = new BoardPiece[3,3];
             var z = 0;
 
-            for (var x = 0; x < 2; x++)
+            for (var x = 0; x <= 2; x++)
             {
-                for (var y = 0; y < 2; y++)
+                for (var y = 0; y <= 2; y++)
                 {
-                    consoleBoard.Layout[x, y] = ConvertToEnum(webBoard[z++]);
+                    consoleBoard[x, y] = ConvertToEnum(webBoard[z++]);
                 }
             }
             return consoleBoard;
         }
 
-        public string[] ConvertConsoleBoardToWebApiBoard(Board board)
+        public string[] ConvertConsoleBoardToWebApiBoard(BoardPiece[,] board)
         {
             var webBoard = new string[9];
             var z = 0;
 
-            for ( var x = 0 ; x < 2 ; x++ )
+            for ( var x = 0 ; x <= 2 ; x++ )
             {
-                for ( var y = 0 ; y < 2 ; y++ )
+                for ( var y = 0 ; y <= 2 ; y++ )
                 {
-                    webBoard[z++] = ConvertEnumToString(board.Layout[x, y]);
+                    webBoard[z++] = ConvertEnumToString(board[x, y]);
                 }
             }
             return webBoard;
