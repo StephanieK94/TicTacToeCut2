@@ -31,11 +31,18 @@ namespace TicTacToeCut2.Api.Controllers
             return webGame.Game.Players;
         }
 
-        //// POST api/tictactoe/players/{player}
-        //[HttpPost("/players/{player}/{move}")]
-        //public WebGame PlayMove(string[] board, string playerPiece, int move)
-        //{
-
-        //}
+        // POST api/tictactoe/players/{player}
+        [HttpPost( "/players/{player}/{move}" )]
+        public WebGame PlayMove ( WebGame game , string playerPiece , int move )
+        {
+            move = move - 1;
+            if (game.Game.Board[move] != null)
+            {
+                game.Game.GameState = "Position Taken";
+                return game;
+            }
+            game.Game.Board[move] = playerPiece;
+            return game;
+        }
     }
 }

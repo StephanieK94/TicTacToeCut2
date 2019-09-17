@@ -30,23 +30,13 @@ namespace TicTacToeCut2.Api.Tests
             result.Should().BeEquivalentTo(expected);
         }
 
-        [Fact(Skip = "Haven't gotten passing yet")]
+        [Fact]
         public void GameController_WhenPlaysMoveOf1_ReturnsChangedBoard()
         {
-            var expected = new GameResultModel()
-            {
-                Board = new string[9] ,
-                Players = new List<PlayerModel>
-                {
-                    new PlayerModel{ Piece = "X" },
-                    new PlayerModel{ Piece = "O" }
-                } ,
-                GameState = "New Game"
-            };
-
-           // var move = 1;
-
-            //var result = _controller.PlayMove(expected.Players[0].Piece, move);
+            var webGame = new WebGame();
+            var result = _controller.PlayMove(webGame, "X" , 1);
+            var expected = new string[9]{"X",null, null , null , null , null , null , null , null};
+            Assert.Equal(expected,result.Game.Board);
         }
     }
 }
