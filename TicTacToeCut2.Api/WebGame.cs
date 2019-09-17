@@ -9,6 +9,6 @@ namespace TicTacToeCut2.Api
 {
     public class WebGame
     {
-        public GameResultModel Game = new GameResultModel();
+        public GameResultModel Model = new GameResultModel();
     }
 }

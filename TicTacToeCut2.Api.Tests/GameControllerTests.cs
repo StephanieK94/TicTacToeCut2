@@ -24,7 +24,7 @@ namespace TicTacToeCut2.Api.Tests
                     new PlayerModel{ Piece = "X" },
                     new PlayerModel{ Piece = "O" }
                 },
-                GameState = "New Game"
+                State = "New Model"
             };
 
             result.Should().BeEquivalentTo(expected);
@@ -36,17 +36,17 @@ namespace TicTacToeCut2.Api.Tests
             var webGame = new WebGame();
             var result = _controller.PlayMove(webGame, "X" , 1);
             var expected = new string[9]{"X",null, null , null , null , null , null , null , null};
-            Assert.Equal(expected,result.Game.Board);
+            Assert.Equal(expected,result.Model.Board);
         }
 
         [Fact(Skip = "Haven't finished the response status codes")]
         public void WhenInvalidMovePlayed_ReturnsGameStateAsInvalid()
         {
             var webGame = new WebGame();
-            webGame.Game.Board = new string[9] { "X" , null , null , null , null , null , null , null , null };
+            webGame.Model.Board = new string[9] { "X" , null , null , null , null , null , null , null , null };
             var result = _controller.PlayMove( webGame , "X" , 1 );
             var expected = "Invalid Move";
-            Assert.Equal( expected , result.Game.GameState );
+            Assert.Equal( expected , result.Model.State );
         }
     }
 }

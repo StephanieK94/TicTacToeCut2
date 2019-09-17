@@ -22,7 +22,7 @@ namespace TicTacToeCut2.Api.Controllers
         public List<PlayerModel> GetPlayersList ()
         {
             var webGame = new WebGame();
-            return webGame.Game.Players;
+            return webGame.Model.Players;
         }
 
         // POST api/values
