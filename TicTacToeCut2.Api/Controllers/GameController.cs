@@ -38,16 +38,15 @@ namespace TicTacToeCut2.Api.Controllers
         {
             move = move - 1;
             if ( game.Model.Board[move] != null )
-            {
-                game.Model.State = "Invalid Move";
-
+            { 
                 //Response = the 400 response and the gameState changes
-
+                game.Model.State = "Invalid Move";
                 return game;
             }
             //Response = the 200 response and the board and state changes changes
             game.Model.Board[move] = playerPiece;
             //game.Model.State = "Player O's turn"
+
             return game;
         }
     }
