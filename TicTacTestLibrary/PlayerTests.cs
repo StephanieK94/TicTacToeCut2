@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using TicTacToe.ConsoleApplication;
+using TicTacToe.ConsoleApplication.Games;
 using Xunit;
-using TicTacToe;
-using TicTacToe.Players;
 
-namespace TicTacTestLibrary
+namespace TicTacToe.ConsoleApplication.Test
 {
     public class PlayerTests
     {
-        private readonly Player _player;
+        private readonly ConsoleGame _game;
 
         public PlayerTests()
         {
-            _player = new Player();
+            _game = new ConsoleGame();
         }
 
         [Fact]
         public void GivenNewPlayer_ReturnsDefaultCharacterAsX()
         {
-            Assert.Equal(BoardPiece.X, _player.Character);
+            Assert.Equal(BoardPiece.X, _game.Player.Character);
         }
 
         [Theory]
@@ -28,10 +25,10 @@ namespace TicTacTestLibrary
         [InlineData(BoardPiece.None, BoardPiece.X)]
         public void GivenCurrentPlayer_WhenChangedPlayerCalled_ReturnExpectedPlayer(BoardPiece currentPlayer, BoardPiece expectedPlayer)
         {
-            _player.Character = currentPlayer;
-            _player.ChangePlayer();
+            _game.Player.Character = currentPlayer;
+            _game.ChangePlayer();
 
-            Assert.Equal(expectedPlayer, _player.Character);
+            Assert.Equal(expectedPlayer, _game.Player.Character);
         }
     }
 }

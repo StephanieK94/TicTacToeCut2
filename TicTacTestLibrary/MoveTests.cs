@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using TicTacToe.ConsoleApplication.Games;
 using Xunit;
-using TicTacToe;
 
-namespace TicTacTestLibrary
+namespace TicTacToe.ConsoleApplication.Test
 {
     public class MoveTests
     {
         private readonly Move _nextMove;
+        private readonly ConsoleGame _game;
 
         public MoveTests()
         {
             _nextMove = new Move();
+            _game = new ConsoleGame();
         }
 
         [Theory]
@@ -27,7 +26,7 @@ namespace TicTacTestLibrary
             _nextMove.Row = row;
             _nextMove.Column = column;
 
-            var actual = _nextMove.ValidatePlayerMoves( _nextMove );
+            var actual = _game.ValidateMoveWithinRange( _nextMove );
 
             Assert.Equal(expectedResult, actual);
         }
@@ -39,7 +38,7 @@ namespace TicTacTestLibrary
         [InlineData( "1,P", false)]
         public void GivenInput_WhenCheckForForfeit_ReturnsExpectedOutput(string input, bool output)
         {
-            var playerForfeits = _nextMove.CheckForForfeit( input );
+            var playerForfeits = _game.CurrentMove.CheckForForfeit( input );
 
             Assert.Equal( output, playerForfeits );
         }
@@ -49,7 +48,7 @@ namespace TicTacTestLibrary
         {
             var input = ",1";
 
-            var isValidInput = _nextMove.ConvertPlayerInputToMove( input );
+            var isValidInput = _game.CurrentMove.ConvertPlayerInputToMove( input );
 
             Assert.False( isValidInput );
         }
