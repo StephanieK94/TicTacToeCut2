@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace TicTacToe
+namespace TicTacToe.ConsoleApplication
 {
     public class Move
     {
@@ -20,14 +18,25 @@ namespace TicTacToe
             set => _column = value - 1;
         }
 
-        public bool ConvertPlayerInputToMove(string userString)
+        public string GetInput ()
+        {
+            var input = System.Console.ReadLine();
+            return input;
+        }
+
+        public bool CheckForForfeit ( string userInput )
+        {
+            return userInput.Contains( "Q" ) || userInput.Contains( "q" );
+        }
+
+        public bool ConvertPlayerInputToMove ( string userString )
         {
             try
             {
                 var input = userString.Split( ',' );
 
-                this.Row = Convert.ToInt32( input[0] );
-                this.Column = Convert.ToInt32( input[1] );
+                this._row = Convert.ToInt32( input[0] );
+                this._column = Convert.ToInt32( input[1] );
 
                 return true;
             }
@@ -35,19 +44,6 @@ namespace TicTacToe
             {
                 return false;
             }
-        }
-
-        public bool ValidatePlayerMoves(Move userInput)
-        {
-            if ( userInput.Row < 0 || userInput.Row > 2 ) return false;
-            if ( userInput.Column < 0 || userInput.Column > 2 ) return false;
-            return true;
-        }
-
-        public bool CheckForForfeit(string userInput)
-        {
-            if ( userInput.Contains( "Q" ) || userInput.Contains( "q" ) ) return true;
-            return false;
         }
     }
 }

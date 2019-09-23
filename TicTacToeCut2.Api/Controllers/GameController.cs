@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using TicTacToe;
-using TicTacToe.Games;
 using TicTacToeCut2.Api;
 using TicTacToeCut2.Api.Models;
 

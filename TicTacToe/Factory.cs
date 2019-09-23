@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TicTacToe.Boards;
-using TicTacToe.Messages;
-using TicTacToe.Players;
+﻿using TicTacToe.ConsoleApplication;
+using TicTacToe.ConsoleApplication.Boards;
+using TicTacToe.ConsoleApplication.Messages;
+using TicTacToe.ConsoleApplication.Players;
 
-namespace TicTacToe
+namespace TicTacToe.ConsoleApplication
 {
     public class Factory
     {
+        public static Move CreateNewMove()
+        {
+            return new Move();
+        }
+
         public static Player CreateConsolePlayer()
         {
             return new Player();

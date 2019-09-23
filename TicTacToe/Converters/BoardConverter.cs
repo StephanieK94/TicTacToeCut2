@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Console.Converters
+﻿namespace TicTacToe.ConsoleApplication.Converters
 {
     public class BoardConverter
     {
