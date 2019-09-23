@@ -1,7 +1,8 @@
-﻿using System;
-using TicTacToe.Players;
+﻿using TicTacToe.ConsoleApplication.Players;
+using System;
+using TicTacToe.ConsoleApplication.Messages;
 
-namespace TicTacToe.Boards
+namespace TicTacToe.ConsoleApplication.Boards
 {
     public class Board
     {
@@ -34,8 +35,9 @@ namespace TicTacToe.Boards
 
                 for ( var column = 0 ; column < 3 ; column++ )
                 {
-                    if ( this.Layout[row , column] == BoardPiece.None ) Console.Write( " * " );
-                    else Console.Write( $" {this.Layout[row , column]} " );
+                   Console.Write(this.Layout[row, column] == BoardPiece.None
+                        ? " * "
+                        : $" {this.Layout[row, column]} ");
                 }
 
                 Console.WriteLine( "" );

@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Messages
+﻿namespace TicTacToe.ConsoleApplication.Messages
 {
     public interface IMessageProcessor
     {
