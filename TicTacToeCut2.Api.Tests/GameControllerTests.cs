@@ -29,7 +29,7 @@ namespace TicTacToeCut2.Api.Tests
                 State = "New Model"
             };
 
-            result.Value.Should().BeEquivalentTo(expected);
+            result.Model.Should().BeEquivalentTo(expected);
         }
 
 
