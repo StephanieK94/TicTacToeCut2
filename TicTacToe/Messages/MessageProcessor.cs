@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System;
 
-namespace TicTacToe.Messages
+namespace TicTacToe.ConsoleApplication.Messages
 {
     public class MessageProcessor : IMessageProcessor
     {

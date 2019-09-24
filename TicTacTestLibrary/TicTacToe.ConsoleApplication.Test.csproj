@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TicTacToe\TicTacToe.Console.csproj" />
+    <ProjectReference Include="..\TicTacToe\TicTacToe.ConsoleApplication.csproj" />
   </ItemGroup>
 
 </Project>

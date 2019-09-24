@@ -1,6 +1,8 @@
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using TicTacToeCut2.Api.Controllers;
 using TicTacToeCut2.Api.Models;
 using Xunit;
@@ -27,7 +29,7 @@ namespace TicTacToeCut2.Api.Tests
                 State = "New Model"
             };
 
-            result.Should().BeEquivalentTo(expected);
+            result.Value.Should().BeEquivalentTo(expected);
         }
 
 
@@ -54,15 +56,18 @@ namespace TicTacToeCut2.Api.Tests
             Assert.Equal( expected , result.Model.Board );
         }
 
-        [Fact( Skip = "Haven't finished the response status codes" )]
+        [Fact]
         public void WhenInvalidMovePlayed_ReturnsGameStateAsInvalid ()
         {
-            var webGame = new WebGame();
-            webGame.Model.Board = new string[9] { "X" , null , null , null , null , null , null , null , null };
-            var result = _controller.PlayMove( webGame , "X" , 1 );
-            var expected = "Invalid Move";
+            var webGame = new WebGame
+            {
+                Model = {Board = new string[9] {"X", null, null, null, null, null, null, null, null}}
+            };
 
-            Assert.Equal( expected , result.Model.State );
+            var result = _controller.PlayMove( webGame , "X" , 1 );
+
+            Assert.Equal(webGame, result);
+            Assert.Equal("Invalid Move", result.Model.State);
         }
     }
 }

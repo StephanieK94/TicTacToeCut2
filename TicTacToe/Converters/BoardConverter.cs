@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TicTacToe;
-using TicTacToe.Boards;
-
-namespace TicTacToeCut2.Api.Converters
+﻿namespace TicTacToe.ConsoleApplication.Converters
 {
     public class BoardConverter
     {

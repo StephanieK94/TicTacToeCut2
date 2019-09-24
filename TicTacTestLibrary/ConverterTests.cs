@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TicTacToe;
-using TicTacToe.Boards;
-using TicTacToeCut2.Api.Converters;
+﻿using TicTacToe.ConsoleApplication.Boards;
+using TicTacToe.ConsoleApplication.Converters;
 using Xunit;
 
-namespace TicTacToeCut2.Api.Tests
+namespace TicTacToe.ConsoleApplication.Test
 {
     public class ConverterTests
     {

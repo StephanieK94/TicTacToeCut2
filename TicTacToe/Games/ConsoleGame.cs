@@ -1,9 +1,9 @@
-﻿using System;
-using TicTacToe.Boards;
-using TicTacToe.Messages;
-using TicTacToe.Players;
+﻿using TicTacToe.ConsoleApplication.Boards;
+using TicTacToe.ConsoleApplication.Messages;
+using TicTacToe.ConsoleApplication.Players;
+using System;
 
-namespace TicTacToe.Games
+namespace TicTacToe.ConsoleApplication.Games
 {
     public class ConsoleGame
     {
@@ -12,75 +12,71 @@ namespace TicTacToe.Games
         public Player Player = Factory.CreateConsolePlayer();
         public MessageProcessor Message = Factory.CreateConsoleMsgProcessor();
         public WinCalculator WinCal = Factory.CreateConsoleWinCalculator();
+        // decoupled from Player when better refactored for Main() to follow the flow, was found to be unneeded for the Player, coupled too tightly
+        public Move CurrentMove = Factory.CreateNewMove();
 
         public void StartGame() 
         {
-            Message.PrintToConsole(Message.MsgDictionary["Welcome"]);
+            Message.PrintToConsole(Message.PrintWelcome());
             Board.PrintBoard();
-
-            Prompt:
-            Message.PrintToConsole( Message.PromptForMove( Player.Character ) );
-
-            var playerInput = GetInput();
-
-            if ( Player.LastMove.CheckForForfeit( playerInput ) == true )
+        }
+        public bool GetValidMove()
+        {
+            Message.PrintToConsole(Message.PromptForMove( Player.Character ));
+            var input = CurrentMove.GetInput();
+            return ValidateInput(input);
+        }
+        public bool ValidateInput(string playerInput)
+        {
+            if ( CurrentMove.CheckForForfeit( playerInput ) == true )
             {
-                Player.ChangePlayer();
-                WinCal.IsWinner = true;
-                goto EndGame;
+                ChangePlayer();
+                this.WinCal.IsWinner = true;
+                return true;
             }
 
-            if ( Player.LastMove.ConvertPlayerInputToMove( playerInput ) == false )
+            if ( CurrentMove.ConvertPlayerInputToMove( playerInput ) == false )
             {
                 Message.PrintToConsole( Message.MsgDictionary["InvalidInput"] );
-                goto Prompt;
+                return false;
             }
 
-            if ( Player.LastMove.ValidatePlayerMoves( Player.LastMove ) == false)
+            if ( ValidateMoveWithinRange( CurrentMove ) == false )
             {
                 Message.PrintToConsole( Message.MsgDictionary["OutOfBound"] );
-                goto Prompt;
+                return false;
             }
-
-            switch( Board.ValidatePositionIsEmpty( Player.LastMove ) )
+            return true;
+        }
+        public bool ValidateMoveWithinRange ( Move userInput )
+        {
+            if ( userInput.Row < 0 || userInput.Row > 2 ) return false;
+            if ( userInput.Column < 0 || userInput.Column > 2 ) return false;
+            return true;
+        }
+        public bool PlayMove(Move gameCurrentMove)
+        {
+            switch ( this.Board.ValidatePositionIsEmpty( gameCurrentMove ) )
             {
                 case true:
-                    Board.PlayMoveOnBoard( Player , Player.LastMove );
+                    this.Board.PlayMoveOnBoard( this.Player , gameCurrentMove );
                     Message.PrintToConsole( Message.MsgDictionary["AcceptedMove"] );
-                    Board.PrintBoard();
-                    break;
+                    this.Board.PrintBoard();
+                    return true;
                 default:
                     Message.PrintToConsole( Message.MsgDictionary["InvalidMove"] );
-                    goto Prompt;
+                    return false;
             }
-
-            WinCal.WinnerCalculator( Board.Layout);
-            TurnCount++;
-
-            if(WinCal.IsWinner == false && TurnCount < 9)
-            {
-                Player.ChangePlayer();
-                goto Prompt;
-            }
-
-            EndGame:
-            Message.PrintToConsole(WinCal.IsWinner == false
-                ? Message.MsgDictionary["ResultWasDraw"]
-                : Message.ReturnWinner(Player.Character.ToString()));
         }
-
+        public void ChangePlayer ()
+        {
+            this.Player.Character = ( this.Player.Character == BoardPiece.X ) ? BoardPiece.O : BoardPiece.X;
+        }
         public bool PromptForNewGame ()
         {
             Message.PrintToConsole( Message.MsgDictionary["PromptForNewGame"] );
-
-            var playAgain = GetInput();
-
+            var playAgain = CurrentMove.GetInput();
             return playAgain.Contains( "Y".ToLower() );
-        }
-
-        public string GetInput()
-        {
-            return Console.ReadLine();
         }
     }
 }

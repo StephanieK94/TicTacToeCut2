@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TicTacToe.ConsoleApplication;
 
-namespace TicTacToe
+namespace TicTacToe.ConsoleApplication
 {
     public class WinCalculator
     {
@@ -68,7 +69,7 @@ namespace TicTacToe
             var middleField = Board[1 , 1];
             if ( middleField != BoardPiece.None )
             {
-                if ( Board[1 , 1] == middleField && Board[2 , 2] == middleField )
+                if ( Board[0 , 0] == middleField && Board[2 , 2] == middleField )
                 {
                     WinDiagonal = true;
                 }

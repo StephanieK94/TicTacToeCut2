@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TicTacToe;
-using TicTacToe.Games;
-using TicTacToe.Players;
+﻿using TicTacToe.ConsoleApplication;
+using TicTacToe.ConsoleApplication.Games;
 using Xunit;
 
-namespace TicTacTestLibrary
+namespace TicTacToe.ConsoleApplication.Test
 {
     public class MessagesTests
     {
