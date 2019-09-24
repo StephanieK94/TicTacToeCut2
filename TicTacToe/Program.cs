@@ -43,34 +43,31 @@ namespace TicTacToe.ConsoleApplication
 
         }
 
-        public static void GetNewGame()
+        // Is this really necessary?
+        // Or would it be more needed for the post
+        // What's the whole idea about getting the Web Api Game and converting it, when all the validation etc gets done in console
+        // Is this to do with when adding some sort of way of storing the past/current game in the web api somehow?
+        static async Task<ConsoleGame> GetNewGame()
         {
-            //using (var client = new HttpClient())
-            //{
-            //    client.BaseAddress = new Uri("http://localhost:44355/");  // add on api/Game?
-            //    client.DefaultRequestHeaders.Accept.Clear();
-            //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); 
-            //                                                                                // that we will get json back
+            using ( var client = new HttpClient() )
+            {
+                client.BaseAddress = new Uri( "http://localhost:44355/" );  // add on api/Game?
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add( new MediaTypeWithQualityHeaderValue( "application/json" ) );
 
-            //    Console.WriteLine("GET");
-            //    HttpResponseMessage response = await client.GetAsync("api/game");
+                HttpResponseMessage response = await client.GetAsync( "api/game" );     // or is it api/values still? how change?
 
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        GameResultModel game = await response.Content.ReadAsAsync<GameResultModel>();
-            //        Console.WriteLine("{0},{1},{2}", game.Board[0], game.Board[1] , game.Board[2] );
-            //        Console.WriteLine("{0},{1},{2}", game.Players[0], game.Players[1], game.State );
-            //    }
-            //}
+                if ( response.IsSuccessStatusCode )
+                {
+                    // to get a game back 
+                    // to convert the game into the game that the console uses?
 
-            //using (var client = new WebClient())
-            //{
-            //    client.Headers.Add("Content-Type", "application/json");
-            //    client.Headers.Add("Accept","application/json");
-
-            //    var result = client.DownloadString("http://localhost:44355/api/Game");
-            //    Console.WriteLine(result);
-            //}
+                    // does this really need to be done for the starting of a game?
+                    // would it be more useful to do this for post etc
+                    // Or keep this for when have storage and id # for the game etc?
+                }
+                return new ConsoleGame();
+            }
         }
     }
 }
