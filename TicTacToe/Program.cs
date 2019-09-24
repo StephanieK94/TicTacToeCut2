@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Net;
-using TicTacToe.ConsoleApplication.Games;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Formatting;
+using TicTacToe.Lib.Games;
 
 namespace TicTacToe.ConsoleApplication
 {

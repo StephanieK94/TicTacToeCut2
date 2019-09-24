@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TicTacToe.ConsoleApplication;
-
-namespace TicTacToe.ConsoleApplication
+﻿namespace TicTacToe.Lib
 {
     public class WinCalculator
     {

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace TicTacToe.ConsoleApplication
+namespace TicTacToe.Lib
 {
-    class GameResultModel
+    public class GameResultModel
     {
         public string[] Board { get; set; }
         public List<PlayerModel> Players { get; set; }

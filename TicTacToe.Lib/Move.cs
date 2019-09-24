@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TicTacToe.ConsoleApplication
+namespace TicTacToe.Lib
 {
     public class Move
     {

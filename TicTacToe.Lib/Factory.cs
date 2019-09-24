@@ -1,9 +1,8 @@
-﻿using TicTacToe.ConsoleApplication;
-using TicTacToe.ConsoleApplication.Boards;
-using TicTacToe.ConsoleApplication.Messages;
-using TicTacToe.ConsoleApplication.Players;
+﻿using TicTacToe.Lib.Boards;
+using TicTacToe.Lib.Messages;
+using TicTacToe.Lib.Players;
 
-namespace TicTacToe.ConsoleApplication
+namespace TicTacToe.Lib
 {
     public class Factory
     {

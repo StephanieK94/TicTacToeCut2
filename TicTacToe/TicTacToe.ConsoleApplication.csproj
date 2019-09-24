@@ -10,4 +10,8 @@
     <PackageReference Include="NUnit" Version="3.12.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TicTacToe.Lib\TicTacToe.Lib.csproj" />
+  </ItemGroup>
+
 </Project>

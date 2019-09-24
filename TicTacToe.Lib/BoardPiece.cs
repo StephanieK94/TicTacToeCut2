@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.ConsoleApplication
+﻿namespace TicTacToe.Lib
 {
     public enum BoardPiece
     {

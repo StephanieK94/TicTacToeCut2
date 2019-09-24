@@ -1,8 +1,7 @@
-﻿using TicTacToe.ConsoleApplication.Players;
-using System;
-using TicTacToe.ConsoleApplication.Messages;
+﻿using System;
+using TicTacToe.Lib.Players;
 
-namespace TicTacToe.ConsoleApplication.Boards
+namespace TicTacToe.Lib.Boards
 {
     public class Board
     {

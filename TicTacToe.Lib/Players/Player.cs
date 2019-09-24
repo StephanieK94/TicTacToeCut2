@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.ConsoleApplication.Players
+﻿namespace TicTacToe.Lib.Players
 {
     public class Player
     {
