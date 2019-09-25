@@ -1,6 +1,5 @@
 ﻿using System;
 using TicTacToe.Lib;
-using TicTacToe.Lib.Converters;
 
 namespace TicTacToe.ConsoleApplication
 {

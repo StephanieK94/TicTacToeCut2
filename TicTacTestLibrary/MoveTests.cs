@@ -1,32 +1,28 @@
-﻿using TicTacToe.ConsoleApplication.Games;
-using Xunit;
+﻿using Xunit;
 
 namespace TicTacToe.ConsoleApplication.Test
 {
     public class MoveTests
     {
-        private readonly Move _nextMove;
+        //private readonly ConsoleMove _nextMove;
         private readonly ConsoleGame _game;
 
         public MoveTests()
         {
-            _nextMove = new Move();
+            //_nextMove = new ConsoleMove();
             _game = new ConsoleGame();
         }
 
         [Theory]
-        [InlineData( 1 , 1 , true )]
-        [InlineData( 2 , 2 , true )]
-        [InlineData( 3 , 3 , true )]
-        [InlineData( 0 , 0 , false )]
-        [InlineData( 4 , 4 , false )]
-        [InlineData( -1 , -1 , false )]
-        public void GivenInput_WhenValidationForRangeCalled_ReturnsExpectedResult(int row, int column, bool expectedResult)
+        [InlineData( "1,1" , true )]
+        [InlineData( "2,2" , true )]
+        [InlineData( "3,3", true )]
+        [InlineData( "0,0" , false )]
+        [InlineData( "4,4" , false )]
+        [InlineData( "-1,-1" , false )]
+        public void GivenInput_WhenValidationForInputCalled_ReturnsExpectedResult(string userInput, bool expectedResult)
         {
-            _nextMove.Row = row;
-            _nextMove.Column = column;
-
-            var actual = _game.ValidateMoveWithinRange( _nextMove );
+            var actual = _game.ValidateInput( userInput );
 
             Assert.Equal(expectedResult, actual);
         }
@@ -38,7 +34,7 @@ namespace TicTacToe.ConsoleApplication.Test
         [InlineData( "1,P", false)]
         public void GivenInput_WhenCheckForForfeit_ReturnsExpectedOutput(string input, bool output)
         {
-            var playerForfeits = _game.CurrentMove.CheckForForfeit( input );
+            var playerForfeits = _game.Move.CheckForForfeit( input );
 
             Assert.Equal( output, playerForfeits );
         }
@@ -48,7 +44,7 @@ namespace TicTacToe.ConsoleApplication.Test
         {
             var input = ",1";
 
-            var isValidInput = _game.CurrentMove.ConvertPlayerInputToMove( input );
+            var isValidInput = _game.Move.CanConvertPlayerInputToMove( input );
 
             Assert.False( isValidInput );
         }

@@ -1,5 +1,4 @@
 ﻿using TicTacToe.ConsoleApplication;
-using TicTacToe.ConsoleApplication.Games;
 using Xunit;
 
 namespace TicTacToe.ConsoleApplication.Test
@@ -16,19 +15,19 @@ namespace TicTacToe.ConsoleApplication.Test
         [Fact]
         public void GivenNewPlayer_ReturnsDefaultCharacterAsX()
         {
-            Assert.Equal(BoardPiece.X, _game.Player.Character);
+            Assert.Equal("X", _game.CurrentPlayer);
         }
 
         [Theory]
-        [InlineData(BoardPiece.X, BoardPiece.O)]
-        [InlineData(BoardPiece.O, BoardPiece.X)]
-        [InlineData(BoardPiece.None, BoardPiece.X)]
-        public void GivenCurrentPlayer_WhenChangedPlayerCalled_ReturnExpectedPlayer(BoardPiece currentPlayer, BoardPiece expectedPlayer)
+        [InlineData("X", "O")]
+        [InlineData("O", "X")]
+        [InlineData("", "X")]
+        public void GivenCurrentPlayer_WhenChangedPlayerCalled_ReturnExpectedPlayer(string currentPlayer, string expectedPlayer)
         {
-            _game.Player.Character = currentPlayer;
+            _game.CurrentPlayer = currentPlayer;
             _game.ChangePlayer();
 
-            Assert.Equal(expectedPlayer, _game.Player.Character);
+            Assert.Equal(expectedPlayer, _game.CurrentPlayer);
         }
     }
 }

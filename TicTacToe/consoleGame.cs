@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using NUnit.Framework.Constraints;
@@ -15,6 +16,7 @@ namespace TicTacToe.ConsoleApplication
 
         // here are the console specific methods
         public ConsoleWinCalculator WinCalculator { get; set; }
+        public ConsoleWriter ConsoleWriter { get; set; }
 
         public ConsoleGame()
         {
@@ -33,12 +35,6 @@ namespace TicTacToe.ConsoleApplication
             // Message.PrintToConsole(Message.PrintWelcome());
             // PrintBoard(Board.Layout);
         }
-        public bool GetValidMove ()
-        {
-            //Message.PrintToConsole( Message.PromptForMove( Player.Character ) );
-            var input = Move.GetInput();
-            return ValidateInput( input );
-        }
 
         public bool ValidateInput ( string playerInput )
         {
@@ -55,18 +51,16 @@ namespace TicTacToe.ConsoleApplication
                 return false;
             }
 
-            if ( ValidateMoveWithinRange( Move ) == false )
+            if ( Move.ValidateMoveWithinRange() == false )
             {
                 // Message.PrintToConsole( Message.MsgDictionary["OutOfBound"] );
                 return false;
             }
+            Move.ConvertToPosition();
             return true;
         }
 
-        public bool ValidateMoveWithinRange ( ConsoleMove userInput )
-        {
-            return userInput.Position >= 0 && userInput.Position <= 9;
-        }
+       
 
         public bool PromptForNewGame ()
         {
@@ -78,6 +72,14 @@ namespace TicTacToe.ConsoleApplication
         public void ChangePlayer()
         {
             this.CurrentPlayer = ( this.CurrentPlayer == "X") ? CurrentPlayer = "O" : CurrentPlayer = "X";
+        }
+    }
+
+    public class ConsoleWriter
+    {
+        public void WriteToConsole(string text)
+        {
+            Console.WriteLine(text);
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using TicTacToe.Lib.Messages;
 
 namespace TicTacToe.ConsoleApplication
 {
-    public class MessageProcessor : IMessageProcessor
+    public class MessageProcessor 
     {
+        // TODO: Refactor these into text files
         public Dictionary<string , string> MsgDictionary = new Dictionary<string , string>()
         {
             { "AcceptedMove", "\nMove accepted, here's the current board:\n" },
@@ -15,24 +15,24 @@ namespace TicTacToe.ConsoleApplication
             { "PromptForNewGame", "\nWould you like to play again? Y / N: " }
         };
 
-        public string PromptForMove(BoardPiece player)
+        public string PromptForMove(string player)
         {
-            return new string( $"\nPlayer {(int)player} enter a coordinate x,y to place your {player}: " );
+            return $"\nPlease enter a coordinate x,y to place your {player}: ";
         }
 
         public string PrintWelcome()
         {
-            return new string( "Welcome to Tic Tac Toe!\n" + "Here's the current board:\n" );
+            return "Welcome to Tic Tac Toe!\n" + "Here's the current board:\n";
         }
 
         public string ReturnWinner(string player)
         {
-            return new string( $"\nWell done {player}, you won the game!\n" );
+            return $"\nWell done {player}, you won the game!\n";
         }
 
         public string ReturnDraw()
         {
-           return new string( "\nIt was a Draw! Better luck next time. \n" );
+           return "\nIt was a Draw! Better luck next time. \n";
         }
 
         public void PrintToConsole(string message)

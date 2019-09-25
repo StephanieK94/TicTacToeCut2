@@ -29,7 +29,6 @@ namespace TicTacToe.ConsoleApplication
                 this._row = Convert.ToInt32( input[0] );
                 this._column = Convert.ToInt32( input[1] );
 
-                ConvertToPosition();
                 return true;
             }
             catch ( FormatException )
@@ -38,7 +37,13 @@ namespace TicTacToe.ConsoleApplication
             }
         }
 
-        private void ConvertToPosition()
+        public bool ValidateMoveWithinRange ()
+        {
+            if ( _row < 0 || _row > 2 ) return false;
+            return _column >= 0 && _column <= 2;
+        }
+
+        public void ConvertToPosition()
         {
             switch (this._row)
             {
