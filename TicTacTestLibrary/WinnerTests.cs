@@ -9,13 +9,19 @@ namespace TicTacToe.ConsoleApplication.Test
 
         public WinnerTests()
         {
-            _game = new ConsoleGame();
+            var service = new TicTacService();
+            _game = service.NewGame();
         }
 
         [Fact]
         public void GivenColumnWin_ReturnWinnerTrue ()
         {
-            _game.Board.Layout = new string[9]{ "" , "" , "" , "" , "" , "" , "" , "" , "" };
+            _game.Board.Layout = new string[9]
+            {
+                "X" , "" , "" ,
+                "X" , "" , "" ,
+                "X" , "" , ""
+            };
 
             _game.WinCalculator.CalculateWinner(_game.Board.Layout);
 
@@ -25,7 +31,12 @@ namespace TicTacToe.ConsoleApplication.Test
         [Fact]
         public void GivenRowWin_ReturnWinnerTrue ()
         {
-            _game.Board.Layout = new string[9] {"X", "X", "X", "", "", "", "", "", ""};
+            _game.Board.Layout = new string[9]
+            {
+                "X", "X", "X",
+                "", "", "",
+                "", "", ""
+            };
 
             _game.WinCalculator.CalculateWinner( _game.Board.Layout );
 
@@ -35,7 +46,12 @@ namespace TicTacToe.ConsoleApplication.Test
         [Fact]
         public void GivenDiagonalWin_ReturnWinnerTrue ()
         {
-            _game.Board.Layout = new string[9]{"X", "", "", "", "X", "", "", "","X"};
+            _game.Board.Layout = new string[9]
+            {
+                "X", "", "",
+                "", "X", "",
+                "", "", "X"
+            };
 
             _game.WinCalculator.CalculateWinner(_game.Board.Layout);
 
@@ -45,7 +61,12 @@ namespace TicTacToe.ConsoleApplication.Test
         [Fact]
         public void GivenReverseDiagonalWin_ReturnWinnerTrue ()
         {
-            _game.Board.Layout = new string[9] {"X", "O", "X", "O", "X", "O", "X", "", "O"};
+            _game.Board.Layout = new string[9]
+            {
+                "X", "O", "X",
+                "O", "X", "O",
+                "X", "", "O"
+            };
 
             _game.WinCalculator.CalculateWinner( _game.Board.Layout );
 
@@ -88,8 +109,8 @@ namespace TicTacToe.ConsoleApplication.Test
             _game.Board.Layout = new string[]
             {
                 "X" ,"X", "O",
-                "O","O", "X",
-                "X","", ""
+                "O", "O", "X",
+                "X", "", ""
             };
 
             var nextMove = new ConsoleMove(){Position = 8};
