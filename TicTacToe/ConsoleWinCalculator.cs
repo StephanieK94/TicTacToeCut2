@@ -7,7 +7,7 @@ namespace TicTacToe.ConsoleApplication
     {
         public string[] Board { get; set; }
         private bool TopCnr { get; set; }
-        private bool BottemCnr { get; set; }
+        private bool BottomCnr { get; set; }
         private bool Middle { get; set; }
 
 
@@ -19,7 +19,7 @@ namespace TicTacToe.ConsoleApplication
         }
         private void CheckBottomLeftCorner ()
         {
-            BottemCnr = Board[8] != "" &&
+            BottomCnr = Board[8] != "" &&
                         ( Board[8] == Board[6] && Board[8] == Board[7]
                         || Board[8] == Board[2] && Board[8] == Board[5] );
         }
@@ -41,14 +41,14 @@ namespace TicTacToe.ConsoleApplication
             IsWinner = false;
 
             TopCnr = false;
-            BottemCnr = false;
+            BottomCnr = false;
             Middle = false;
 
             CheckTopLeftCorner();
             CheckBottomLeftCorner();
             CheckMiddlePoint();
 
-            this.IsWinner = TopCnr || BottemCnr || Middle;
+            this.IsWinner = TopCnr || BottomCnr || Middle;
         }
     }
 }
