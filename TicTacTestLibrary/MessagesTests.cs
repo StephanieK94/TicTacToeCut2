@@ -9,7 +9,8 @@ namespace TicTacToe.ConsoleApplication.Test
 
         public MessagesTests()
         {
-            _game = new ConsoleGame();
+            var service = new TicTacService();
+            _game = service.NewGame();
         }
 
         // TODO: add tests for when way to process messages is decided
