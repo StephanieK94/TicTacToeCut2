@@ -28,5 +28,10 @@ namespace TicTacToe.ConsoleApplication
         {
             return new string[9] { "" , "" , "" , "" , "" , "" , "" , "" , "" };
         }
+
+        public static ConsoleWriter CreateConsoleWriter()
+        {
+            return new ConsoleWriter();
+        }
     }
 }

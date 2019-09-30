@@ -14,7 +14,6 @@ namespace TicTacToe.ConsoleApplication
         public string CurrentPlayer { get; set; }
         public ConsoleMove CurrentMove { get; set; }
 
-        // here are the console specific methods
         public ConsoleWinCalculator WinCalculator { get; set; }
         public ConsoleWriter ConsoleWriter { get; set; }
 
@@ -24,16 +23,15 @@ namespace TicTacToe.ConsoleApplication
             Board = Factory.CreateConsoleBoard();
             CurrentPlayer = "";
             CurrentMove = Factory.CreateNewConsoleMove();
-            WinCalculator = new ConsoleWinCalculator(); // TODO: Factory this
-            ConsoleWriter = new ConsoleWriter();
+            WinCalculator = Factory.CreateConsoleWinCalculator(); 
+            ConsoleWriter = Factory.CreateConsoleWriter();
         }
 
         public bool PlayMove(int currentMove)
         {
-            if (this.Board.Layout[currentMove] != "") return false;
-            this.Board.Layout[currentMove] = this.CurrentPlayer;
+            if (Board.Layout[currentMove] != "") return false;
+            Board.Layout[currentMove] = CurrentPlayer;
             return true;
-            // TODO: Remove this. ?
         }
         public void StartGame ()
         {
@@ -46,7 +44,7 @@ namespace TicTacToe.ConsoleApplication
             if ( CurrentMove.CheckForForfeit( playerInput ) == true )
             {
                 ChangePlayer();
-                this.WinCalculator.IsWinner = true;
+                WinCalculator.IsWinner = true;
                 return true;
             }
 
@@ -76,7 +74,7 @@ namespace TicTacToe.ConsoleApplication
 
         public void ChangePlayer()
         {
-            this.CurrentPlayer = ( this.CurrentPlayer == "X") ? CurrentPlayer = "O" : CurrentPlayer = "X";
+            CurrentPlayer = ( CurrentPlayer == "X") ? CurrentPlayer = "O" : CurrentPlayer = "X";
         }
     }
 

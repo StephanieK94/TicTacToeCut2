@@ -32,7 +32,6 @@ namespace TicTacToe.ConsoleApplication
                            || Board[4] == Board[3] && Board[4] == Board[5]);
         }
         
-        // From the interface
         public bool IsWinner { get; set; }
         public void CalculateWinner (string[] layout )
         {
