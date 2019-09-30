@@ -6,26 +6,26 @@ namespace TicTacToe.ConsoleApplication
     public class ConsoleWinCalculator : IWinCalculator
     {
         public string[] Board { get; set; }
-        private bool WinRow { get; set; }
-        private bool WinColumn { get; set; }
-        private bool WinDiagonal { get; set; }
+        private bool TopCnr { get; set; }
+        private bool BottemCnr { get; set; }
+        private bool Middle { get; set; }
 
 
-        private void CheckRows ()
+        private void CheckTopLeftCorner ()
         {
-            WinRow = Board[0] != "" && 
+            TopCnr = Board[0] != "" && 
                      (Board[0] == Board[1] && Board[0] == Board[2]
                       || Board[0] == Board[3] && Board[0] == Board[6]);
         }
-        private void CheckColumns ()
+        private void CheckBottomLeftCorner ()
         {
-            WinColumn = Board[8] != "" &&
+            BottemCnr = Board[8] != "" &&
                         ( Board[8] == Board[6] && Board[8] == Board[7]
                         || Board[8] == Board[2] && Board[8] == Board[5] );
         }
-        private void CheckDiagonals ()
+        private void CheckMiddlePoint ()
         {
-            WinDiagonal = Board[4] != "" &&
+            Middle = Board[4] != "" &&
                           (Board[4] == Board[0] && Board[4] == Board[8]
                            || Board[4] == Board[2] && Board[4] == Board[6]
                            || Board[4] == Board[1] && Board[4] == Board[7]
@@ -40,15 +40,15 @@ namespace TicTacToe.ConsoleApplication
 
             IsWinner = false;
 
-            WinRow = false;
-            WinColumn = false;
-            WinDiagonal = false;
+            TopCnr = false;
+            BottemCnr = false;
+            Middle = false;
 
-            CheckRows();
-            CheckColumns();
-            CheckDiagonals();
+            CheckTopLeftCorner();
+            CheckBottomLeftCorner();
+            CheckMiddlePoint();
 
-            this.IsWinner = WinRow || WinColumn || WinDiagonal;
+            this.IsWinner = TopCnr || BottemCnr || Middle;
         }
     }
 }
