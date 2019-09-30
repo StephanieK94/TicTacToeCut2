@@ -6,6 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ConsoleMessages.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ConsoleMessages.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="NUnit" Version="3.12.0" />
   </ItemGroup>

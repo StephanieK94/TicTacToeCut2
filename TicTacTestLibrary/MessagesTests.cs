@@ -13,6 +13,13 @@ namespace TicTacToe.ConsoleApplication.Test
             _game = service.NewGame();
         }
 
-        // TODO: add tests for when way to process messages is decided
+        [Fact]
+        public void WhenWelcomeMessageCalled_ReturnsExpectedString()
+        {
+            var dict = _game.Message.ConsoleMessages;
+            var actual = dict["AcceptedMove"];
+        
+            Assert.Equal( "Move accepted here's the current board:", actual);
+        }
     }
 }

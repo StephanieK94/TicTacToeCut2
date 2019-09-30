@@ -16,6 +16,7 @@ namespace TicTacToe.ConsoleApplication
 
         public ConsoleWinCalculator WinCalculator { get; set; }
         public ConsoleWriter ConsoleWriter { get; set; }
+        public MessageProcessor Message { get; set; }
 
         public ConsoleGame()
         {
@@ -25,6 +26,7 @@ namespace TicTacToe.ConsoleApplication
             CurrentMove = Factory.CreateNewConsoleMove();
             WinCalculator = Factory.CreateConsoleWinCalculator(); 
             ConsoleWriter = Factory.CreateConsoleWriter();
+            Message = Factory.CreateConsoleMsgProcessor();
         }
 
         public bool PlayMove(int currentMove)
@@ -63,7 +65,6 @@ namespace TicTacToe.ConsoleApplication
             return true;
         }
 
-       
 
         public bool PromptForNewGame ()
         {
@@ -82,7 +83,7 @@ namespace TicTacToe.ConsoleApplication
     {
         public void WriteToConsole(string text)
         {
-            Console.WriteLine(text);
+            Console.WriteLine("\n" + text + "\n");
         }
     }
 }
