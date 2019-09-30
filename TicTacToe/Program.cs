@@ -18,9 +18,9 @@ namespace TicTacToe.ConsoleApplication
             game.StartGame();
 
             MovePrompt:
-            if( game.ValidateInput(game.Move.GetInput()) == false ) goto MovePrompt; 
+            if( game.ValidateInput(game.CurrentMove.GetInput()) == false ) goto MovePrompt; 
             if( game.WinCalculator.IsWinner == true ) goto EndGame; // Checking forfeit
-            if( game.PlayMove( game.Move.Position ) == false ) goto MovePrompt; 
+            if( game.PlayMove( game.CurrentMove.Position ) == false ) goto MovePrompt; 
 
             game.WinCalculator.CalculateWinner(game.Board.Layout);
             game.TurnCount++;

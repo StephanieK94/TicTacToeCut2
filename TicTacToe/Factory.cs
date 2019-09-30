@@ -11,7 +11,7 @@ namespace TicTacToe.ConsoleApplication
 
         public static ConsoleBoard CreateConsoleBoard()
         {
-            return new ConsoleBoard();
+            return new ConsoleBoard(CreateConsoleBoardLayout());
         }
 
         public static MessageProcessor CreateConsoleMsgProcessor()
@@ -22,6 +22,11 @@ namespace TicTacToe.ConsoleApplication
         public static ConsoleWinCalculator CreateConsoleWinCalculator()
         {
             return new ConsoleWinCalculator();
+        }
+
+        public static string[] CreateConsoleBoardLayout()
+        {
+            return new string[9] { "" , "" , "" , "" , "" , "" , "" , "" , "" };
         }
     }
 }

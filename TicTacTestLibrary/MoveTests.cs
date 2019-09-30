@@ -4,13 +4,12 @@ namespace TicTacToe.ConsoleApplication.Test
 {
     public class MoveTests
     {
-        //private readonly ConsoleMove _nextMove;
         private readonly ConsoleGame _game;
 
         public MoveTests()
         {
-            //_nextMove = new ConsoleMove();
-            _game = new ConsoleGame();
+            var service = new TicTacService();
+            _game = service.NewGame();
         }
 
         [Theory]
@@ -34,7 +33,7 @@ namespace TicTacToe.ConsoleApplication.Test
         [InlineData( "1,P", false)]
         public void GivenInput_WhenCheckForForfeit_ReturnsExpectedOutput(string input, bool output)
         {
-            var playerForfeits = _game.Move.CheckForForfeit( input );
+            var playerForfeits = _game.CurrentMove.CheckForForfeit( input );
 
             Assert.Equal( output, playerForfeits );
         }
@@ -44,7 +43,7 @@ namespace TicTacToe.ConsoleApplication.Test
         {
             var input = ",1";
 
-            var isValidInput = _game.Move.CanConvertPlayerInputToMove( input );
+            var isValidInput = _game.CurrentMove.CanConvertPlayerInputToMove( input );
 
             Assert.False( isValidInput );
         }

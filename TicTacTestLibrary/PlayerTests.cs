@@ -9,7 +9,8 @@ namespace TicTacToe.ConsoleApplication.Test
 
         public PlayerTests()
         {
-            _game = new ConsoleGame();
+            var service = new TicTacService();
+            _game = service.NewGame();
         }
 
         [Fact]

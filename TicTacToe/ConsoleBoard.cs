@@ -6,6 +6,11 @@ namespace TicTacToe.ConsoleApplication
     {
         public string[] Layout { get; set; }
 
+        public ConsoleBoard(string[] layout)
+        {
+            Layout = layout;
+        }
+
         public void PlayMoveOnBoard ( string currentPlayer , int currentMove )
         {
             this.Layout[currentMove] = currentPlayer;

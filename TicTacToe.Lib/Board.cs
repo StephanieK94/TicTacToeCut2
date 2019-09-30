@@ -1,12 +1,14 @@
-﻿namespace TicTacToe.Lib
+﻿using static System.String;
+
+namespace TicTacToe.Lib
 {
     public class Board
     {
         public string[] Layout { get; set; }
 
-        public Board ()
+        public Board(string[] layout)
         {
-            Layout = new string[] {};
+            Layout = layout;
         }
 
         public void PlayMoveOnBoard(string currentPlayer, int currentMove)
@@ -16,7 +18,7 @@
 
         public bool ValidatePositionIsEmpty(int currentMove)
         {
-            return this.Layout[currentMove] == "";
+            return this.Layout[currentMove] == Empty;
         }
     }
 }

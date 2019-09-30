@@ -26,8 +26,8 @@ namespace TicTacToe.ConsoleApplication
             {
                 var input = userString.Split( ',' );
 
-                this._row = Convert.ToInt32( input[0] );
-                this._column = Convert.ToInt32( input[1] );
+                this._row = Convert.ToInt32( input[0] ) -1;
+                this._column = Convert.ToInt32( input[1] ) -1;
 
                 return true;
             }

@@ -13,6 +13,9 @@
             TurnCount = 0;
             Player = "X";
             CurrentMove = 0;
+            Board = Factory.CreateNewGameBoard();
+            // Then it is instantiated here specific to this Game, and keeps the Board as a decoupled version? 
+            // Same for WinCalculator = Factory.NewGameWinCalculator(); ?? Keeps it more to do with the interface?
         }
     }
 }

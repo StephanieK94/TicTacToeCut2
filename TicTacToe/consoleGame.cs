@@ -12,7 +12,7 @@ namespace TicTacToe.ConsoleApplication
         public int TurnCount { get; set; }
         public ConsoleBoard Board { get; set; }
         public string CurrentPlayer { get; set; }
-        public ConsoleMove Move { get; set; }
+        public ConsoleMove CurrentMove { get; set; }
 
         // here are the console specific methods
         public ConsoleWinCalculator WinCalculator { get; set; }
@@ -20,7 +20,12 @@ namespace TicTacToe.ConsoleApplication
 
         public ConsoleGame()
         {
-            WinCalculator = new ConsoleWinCalculator();
+            TurnCount = 0;
+            Board = Factory.CreateConsoleBoard();
+            CurrentPlayer = "";
+            CurrentMove = Factory.CreateNewConsoleMove();
+            WinCalculator = new ConsoleWinCalculator(); // TODO: Factory this
+            ConsoleWriter = new ConsoleWriter();
         }
 
         public bool PlayMove(int currentMove)
@@ -28,7 +33,7 @@ namespace TicTacToe.ConsoleApplication
             if (this.Board.Layout[currentMove] != "") return false;
             this.Board.Layout[currentMove] = this.CurrentPlayer;
             return true;
-
+            // TODO: Remove this. ?
         }
         public void StartGame ()
         {
@@ -38,25 +43,25 @@ namespace TicTacToe.ConsoleApplication
 
         public bool ValidateInput ( string playerInput )
         {
-            if ( Move.CheckForForfeit( playerInput ) == true )
+            if ( CurrentMove.CheckForForfeit( playerInput ) == true )
             {
                 ChangePlayer();
                 this.WinCalculator.IsWinner = true;
                 return true;
             }
 
-            if ( Move.CanConvertPlayerInputToMove( playerInput ) == false )
+            if ( CurrentMove.CanConvertPlayerInputToMove( playerInput ) == false )
             {
                 // Message.PrintToConsole( Message.MsgDictionary["InvalidInput"] );
                 return false;
             }
 
-            if ( Move.ValidateMoveWithinRange() == false )
+            if ( CurrentMove.ValidateMoveWithinRange() == false )
             {
                 // Message.PrintToConsole( Message.MsgDictionary["OutOfBound"] );
                 return false;
             }
-            Move.ConvertToPosition();
+            CurrentMove.ConvertToPosition();
             return true;
         }
 
@@ -65,7 +70,7 @@ namespace TicTacToe.ConsoleApplication
         public bool PromptForNewGame ()
         {
             //Message.PrintToConsole( Message.MsgDictionary["PromptForNewGame"] );
-            var playAgain = Move.GetInput();
+            var playAgain = CurrentMove.GetInput();
             return playAgain.ToLower().Contains( "Y".ToLower() );
         }
 
