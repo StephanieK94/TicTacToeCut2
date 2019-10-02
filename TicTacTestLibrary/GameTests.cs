@@ -1,5 +1,5 @@
-﻿using TicTacToe.ConsoleApplication;
-using TicTacToe.ConsoleApplication.Games;
+﻿using System;
+using TicTacToe.ConsoleApplication;
 using Xunit;
 
 namespace TicTacToe.ConsoleApplication.Test
@@ -10,16 +10,14 @@ namespace TicTacToe.ConsoleApplication.Test
 
         public GameTests()
         {
-            _newGame = new ConsoleGame();
+            var service = new TicTacService();
+            _newGame = service.NewGame();
         }
 
         [Fact]
         public void GivenANewGame_ReturnsEmptyGameBoard ()
         {
-            var expectedGameBoard = new BoardPiece[,] {
-                { BoardPiece.None, BoardPiece.None, BoardPiece.None } ,
-                { BoardPiece.None , BoardPiece.None , BoardPiece.None } ,
-                { BoardPiece.None , BoardPiece.None , BoardPiece.None } };
+            var expectedGameBoard = new string[9]{ "", "" , "" , "" , "" , "" , "" , "" , "" };
 
             Assert.Equal( expectedGameBoard , _newGame.Board.Layout );
         }
@@ -27,9 +25,7 @@ namespace TicTacToe.ConsoleApplication.Test
         [Fact]
         public void GivenANewGame_ReturnsTheCurrentPlayerAsX()
         {
-            var expectedStartPlayer = BoardPiece.X;
-
-            Assert.Equal( expectedStartPlayer , Factory.CreateConsolePlayer().Character );
+            Assert.Equal( "X" , _newGame.CurrentPlayer );
         }
     }
 }

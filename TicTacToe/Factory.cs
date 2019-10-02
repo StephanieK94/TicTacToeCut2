@@ -1,25 +1,17 @@
-﻿using TicTacToe.ConsoleApplication;
-using TicTacToe.ConsoleApplication.Boards;
-using TicTacToe.ConsoleApplication.Messages;
-using TicTacToe.ConsoleApplication.Players;
+﻿using TicTacToe.Lib;
 
 namespace TicTacToe.ConsoleApplication
 {
     public class Factory
     {
-        public static Move CreateNewMove()
+        public static ConsoleMove CreateNewConsoleMove()
         {
-            return new Move();
+            return new ConsoleMove();
         }
 
-        public static Player CreateConsolePlayer()
+        public static ConsoleBoard CreateConsoleBoard()
         {
-            return new Player();
-        }
-
-        public static Board CreateConsoleBoard()
-        {
-            return new Board();
+            return new ConsoleBoard(CreateConsoleBoardLayout());
         }
 
         public static MessageProcessor CreateConsoleMsgProcessor()
@@ -27,14 +19,19 @@ namespace TicTacToe.ConsoleApplication
             return new MessageProcessor();
         }
 
-        public static WinCalculator CreateConsoleWinCalculator()
+        public static ConsoleWinCalculator CreateConsoleWinCalculator()
         {
-            return new WinCalculator();
+            return new ConsoleWinCalculator();
         }
 
-        public static string[] CreateWebBoard()
+        public static string[] CreateConsoleBoardLayout()
         {
-            return new string[9];
+            return new string[9] { "" , "" , "" , "" , "" , "" , "" , "" , "" };
+        }
+
+        public static ConsoleWriter CreateConsoleWriter()
+        {
+            return new ConsoleWriter();
         }
     }
 }

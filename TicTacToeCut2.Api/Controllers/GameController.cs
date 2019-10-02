@@ -20,11 +20,10 @@ namespace TicTacToeCut2.Api.Controllers
     {
         // GET api/tictactoe
         [HttpGet]
-        public ActionResult<GameResultModel> GetNewGame ()
+        public WebGame GetNewGame ()
         {
-            var webGame = new WebGame();
-            // if (webGame == null) throw new Exception(HttpStatusCode.NotFound.ToString());
-            return webGame.Model;
+            return new WebGame();
+
         }
 
         // GET api/tictactoe/players
@@ -44,14 +43,12 @@ namespace TicTacToeCut2.Api.Controllers
             { 
                 game.Model.State = "Invalid Move";
 
-                //return BadRequest(game);
                 return game;
             }
-            //Response = the 200 response and the board and state changes changes
             game.Model.Board[move] = playerPiece;
-            //game.Model.State = "Player O's turn"
+            var nextPlayer = playerPiece == game.Model.Players[0].Piece ? game.Model.Players[1].Piece : game.Model.Players[0].Piece;
+            //game.Model.State = new string($"{0}'s turn", nextPlayer);
 
-            //return Ok( game );
             return game;
         }
     }
