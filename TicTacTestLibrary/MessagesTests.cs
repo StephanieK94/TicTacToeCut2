@@ -16,10 +16,9 @@ namespace TicTacToe.ConsoleApplication.Test
         [Fact]
         public void WhenWelcomeMessageCalled_ReturnsExpectedString()
         {
-            var dict = _game.Message.ConsoleMessages;
-            var actual = dict["AcceptedMove"];
+            var msg = _game.Message.AcceptedMove();
         
-            Assert.Equal( "Move accepted here's the current board:", actual);
+            Assert.Equal( "Move accepted here's the current board:", msg);
         }
     }
 }
