@@ -15,30 +15,10 @@ namespace TicTacToe.ConsoleApplication
             var service = new TicTacService();
             var game = service.NewGame();
 
-            game.StartGame();
-
-            MovePrompt:
-            if( game.ValidateInput(game.CurrentMove.GetInput()) == false ) goto MovePrompt; 
-            if( game.WinCalculator.IsWinner == true ) goto EndGame; // Checking forfeit
-            if( game.PlayMove( game.CurrentMove.Position ) == false ) goto MovePrompt; 
-
-            game.WinCalculator.CalculateWinner(game.Board.Layout);
-            game.TurnCount++;
-
-            if ( game.WinCalculator.IsWinner == false && game.TurnCount < 9 )
-            {
-                game.ChangePlayer();
-                goto MovePrompt;
-            }
-
-            EndGame:
-            //game.Message.PrintToConsole(game.WinCalculator.IsWinner == false
-                //? game.Message.ReturnDraw()
-                //: game.Message.ReturnWinner(game.Player.Character.ToString()));
+            service.StartGame(game);
 
             if ( game.PromptForNewGame() == true )
                 goto StartNewGame;
-
         }
     }
 }

@@ -9,12 +9,6 @@ namespace TicTacToe.ConsoleApplication
 
         public int Position { get; set; }
 
-        public string GetInput ()
-        {
-            var input = Console.ReadLine();
-            return input;
-        }
-
         public bool CheckForForfeit ( string userInput )
         {
             return userInput.Contains( "Q" ) || userInput.Contains( "q" );
