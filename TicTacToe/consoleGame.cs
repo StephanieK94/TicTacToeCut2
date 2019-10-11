@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
+using System.Threading.Tasks.Dataflow;
 using NUnit.Framework.Constraints;
 using TicTacToe.Lib;
 
@@ -16,9 +16,11 @@ namespace TicTacToe.ConsoleApplication
 
         public ConsoleWinCalculator WinCalculator { get; set; }
         public ConsoleWriter ConsoleWriter { get; set; }
-        public MessageProcessor Message { get; set; }
+        //public MessageProcessor Message { get; set; }
+        public MessageList Message { get; set; }
+        public ConsoleReader ConsoleReader { get; set; }
 
-        public ConsoleGame()
+        public ConsoleGame ()
         {
             TurnCount = 0;
             Board = Factory.CreateConsoleBoard();
@@ -26,7 +28,7 @@ namespace TicTacToe.ConsoleApplication
             CurrentMove = Factory.CreateNewConsoleMove();
             WinCalculator = Factory.CreateConsoleWinCalculator(); 
             ConsoleWriter = Factory.CreateConsoleWriter();
-            Message = Factory.CreateConsoleMsgProcessor();
+            Message = new MessageList();
         }
 
         public bool PlayMove(int currentMove)
@@ -52,38 +54,30 @@ namespace TicTacToe.ConsoleApplication
 
             if ( CurrentMove.CanConvertPlayerInputToMove( playerInput ) == false )
             {
-                // Message.PrintToConsole( Message.MsgDictionary["InvalidInput"] );
+                ConsoleWriter.PrintOutput( Message.InvalidInput());
                 return false;
             }
 
             if ( CurrentMove.ValidateMoveWithinRange() == false )
             {
-                // Message.PrintToConsole( Message.MsgDictionary["OutOfBound"] );
+                ConsoleWriter.PrintOutput( Message.OutOfBounds() );
                 return false;
             }
             CurrentMove.ConvertToPosition();
             return true;
         }
 
-
+        // TODO: Remove this and refactor so a part of the tic tac toe service?
         public bool PromptForNewGame ()
         {
-            //Message.PrintToConsole( Message.MsgDictionary["PromptForNewGame"] );
-            var playAgain = CurrentMove.GetInput();
+            ConsoleWriter.PrintOutput( Message.PromptForNewGame() );
+            var playAgain = ConsoleReader.GetInput();
             return playAgain.ToLower().Contains( "Y".ToLower() );
         }
 
         public void ChangePlayer()
         {
             CurrentPlayer = ( CurrentPlayer == "X") ? CurrentPlayer = "O" : CurrentPlayer = "X";
-        }
-    }
-
-    public class ConsoleWriter
-    {
-        public void WriteToConsole(string text)
-        {
-            Console.WriteLine("\n" + text + "\n");
         }
     }
 }
