@@ -10,7 +10,6 @@ namespace TicTacToe.ConsoleApplication
         private bool BottomCnr { get; set; }
         private bool Middle { get; set; }
 
-
         private void CheckTopLeftCorner ()
         {
             TopCnr = Board[0] != "" && 
@@ -33,6 +32,11 @@ namespace TicTacToe.ConsoleApplication
         }
         
         public bool IsWinner { get; set; }
+        public ConsoleWinCalculator()
+        {
+            IsWinner = false;
+        }
+
         public void CalculateWinner (string[] layout )
         {
             this.Board = layout;

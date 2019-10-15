@@ -7,7 +7,7 @@ using TicTacToe.Lib;
 
 namespace TicTacToe.ConsoleApplication
 {
-    public class ConsoleGame
+    public class consoleGame
     {
         public int TurnCount { get; set; }
         public ConsoleBoard Board { get; set; }
@@ -17,11 +17,11 @@ namespace TicTacToe.ConsoleApplication
         public ConsoleWinCalculator WinCalculator { get; set; }
         public ConsoleWriter ConsoleWriter { get; set; }
         //public MessageProcessor Message { get; set; }
-        public MessageList Message { get; set; }
+        public Messages Message { get; set; }
         public ConsoleReader ConsoleReader { get; set; }
 
         // TODO: Remove this into the service?
-        public ConsoleGame ()
+        public consoleGame ()
         {
             TurnCount = 0;
             Board = Factory.CreateConsoleBoard();

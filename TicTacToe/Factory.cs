@@ -33,5 +33,15 @@ namespace TicTacToe.ConsoleApplication
         {
             return new ConsoleWriter();
         }
+
+        public static ConsoleReader CreateConsoleReader()
+        {
+            return new ConsoleReader();
+        }
+
+        public static Messages CreateMessageList()
+        {
+            return new Messages();
+        }
     }
 }

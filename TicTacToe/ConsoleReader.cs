@@ -8,7 +8,5 @@ namespace TicTacToe.ConsoleApplication
         {
             return Console.ReadLine();
         }
-
-        
     }
 }

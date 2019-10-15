@@ -6,7 +6,7 @@ namespace TicTacToe.ConsoleApplication.Test
 {
     public class GameTests
     {
-        private readonly ConsoleGame _newGame;
+        private readonly consoleGame _newGame;
 
         public GameTests()
         {

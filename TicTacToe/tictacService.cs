@@ -5,10 +5,10 @@ namespace TicTacToe.ConsoleApplication
 {
     public class TicTacService
     {
-        public ConsoleGame NewGame()
+        public consoleGame NewGame()
         {
             var game = new Game();
-            var consoleGame = new ConsoleGame
+            var consoleGame = new consoleGame
             {
                 CurrentMove = { Position = game.CurrentMove},
                 CurrentPlayer = game.Player,
@@ -18,12 +18,13 @@ namespace TicTacToe.ConsoleApplication
             return consoleGame;
         }
 
-        public void StartGame(ConsoleGame game)
+        public void StartGame(consoleGame game)
         {
             game.StartGame();
 
             MovePrompt:
-            if ( game.ValidateInput( game.ConsoleReader.GetInput() ) == false ) goto MovePrompt;
+            var input = game.ConsoleReader.GetInput();
+            if ( game.ValidateInput( input ) == false ) goto MovePrompt;
             if ( game.WinCalculator.IsWinner == true ) goto EndGame;
             if ( game.PlayMove( game.CurrentMove.Position ) == false ) goto MovePrompt;
 
@@ -33,6 +34,7 @@ namespace TicTacToe.ConsoleApplication
             if ( game.WinCalculator.IsWinner == false && game.TurnCount < 9 )
             {
                 game.ChangePlayer();
+                game.ConsoleWriter.PrintBoard(game.Board.Layout);
                 goto MovePrompt;
             }
 
