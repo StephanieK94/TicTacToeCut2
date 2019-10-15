@@ -1,6 +1,6 @@
 ﻿namespace TicTacToe.ConsoleApplication
 {
-    public class MessageList
+    public class Messages
     {
         public string Welcome()
         {

@@ -20,6 +20,7 @@ namespace TicTacToe.ConsoleApplication
         public MessageList Message { get; set; }
         public ConsoleReader ConsoleReader { get; set; }
 
+        // TODO: Remove this into the service?
         public ConsoleGame ()
         {
             TurnCount = 0;
@@ -28,7 +29,8 @@ namespace TicTacToe.ConsoleApplication
             CurrentMove = Factory.CreateNewConsoleMove();
             WinCalculator = Factory.CreateConsoleWinCalculator(); 
             ConsoleWriter = Factory.CreateConsoleWriter();
-            Message = new MessageList();
+            ConsoleReader = Factory.CreateConsoleReader();
+            Message = Factory.CreateMessageList();
         }
 
         public bool PlayMove(int currentMove)
@@ -39,8 +41,8 @@ namespace TicTacToe.ConsoleApplication
         }
         public void StartGame ()
         {
-            // Message.PrintToConsole(Message.PrintWelcome());
-            // PrintBoard(Board.Layout);
+            ConsoleWriter.PrintOutput(Message.Welcome());
+            ConsoleWriter.PrintBoard(Board.Layout);
         }
 
         public bool ValidateInput ( string playerInput )
