@@ -1,9 +1,0 @@
-AcceptedMove,Move accepted here's the current board:
-OutOfBounds,Oh no...your coordinates were out of the acceptable range. Rows and Columns are 1 - 3 based on the board. Try again...
-InvalidMove,Oh no...a piece is already in this place! Try again...
-InvalidInput,Oh no...invalid coordinates. Try entering two numbers for where you would like to play, like this: `1,1`
-PromptForNewGame,Would you like to play again? Y / N: 
-PromptForMove,Please enter a coordinate x y to place your piece: 
-PrintWelcome,Welcome to Tic Tac Toe!Here's the current board:
-ReturnWinner, won the game!
-ReturnDraw,It was a Draw! Better luck next time.

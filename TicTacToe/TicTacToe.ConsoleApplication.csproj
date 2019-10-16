@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,12 +7,6 @@
 
   <ItemGroup>
     <None Remove="ConsoleMessages.csv" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Messages-IgnoreForNow\ConsoleMessages.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
