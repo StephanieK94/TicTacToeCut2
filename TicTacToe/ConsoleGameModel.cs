@@ -8,7 +8,7 @@ using TicTacToe.Lib;
 
 namespace TicTacToe.ConsoleApplication
 {
-    public class ConsoleGame
+    public class ConsoleGameModel
     {
         public int TurnCount { get; set; }
         public string[] Board { get; set; }

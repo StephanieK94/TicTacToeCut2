@@ -4,7 +4,7 @@ namespace TicTacToe.ConsoleApplication.Test
 {
     public class MoveTests
     {
-        private readonly ConsoleGame _game;
+        private readonly ConsoleGameModel _game;
         private TicTacService service;
         public MoveTests()
         {
