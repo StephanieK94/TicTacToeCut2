@@ -11,6 +11,8 @@ namespace TicTacToe.ConsoleApplication
     {
         static void Main(string[] args)
         {
+            // Add in here about reading from a textfile the object to see if there is a saved game
+            // If there is set game as that game and pass through, otherwise start the new game?
             StartNewGame:
             Console.Clear();
             var service = new TicTacService();
