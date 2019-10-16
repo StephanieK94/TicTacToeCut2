@@ -9,11 +9,6 @@ namespace TicTacToe.ConsoleApplication
             return new ConsoleMove();
         }
 
-        public static ConsoleBoard CreateConsoleBoard()
-        {
-            return new ConsoleBoard(CreateConsoleBoardLayout());
-        }
-
         public static MessageProcessor CreateConsoleMsgProcessor()
         {
             return new MessageProcessor();
