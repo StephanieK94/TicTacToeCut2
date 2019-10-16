@@ -14,7 +14,7 @@ namespace TicTacToeCut2.Api
             var game = new Game();
             var webModel = new GameResultModel()
             {
-                Board = game.Board.Layout,
+                Board = game.Board,
                 Players = new List<string>() { "X", "O"},
                 State = "New Game",
             };
