@@ -7,5 +7,6 @@ namespace TicTacToeCut2.Api.Models
         public string[] Board { get; set; }
         public List<string> Players { get; set; }
         public string State { get; set; }
+        public string CurrentPlayer { get; internal set; }
     }
 }

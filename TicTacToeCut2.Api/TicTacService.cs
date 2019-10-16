@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TicTacToe.Lib;
-//using TicTacToe;
 using TicTacToeCut2.Api.Models;
 
 namespace TicTacToeCut2.Api
@@ -22,22 +21,35 @@ namespace TicTacToeCut2.Api
             return webModel;
         }
 
-        public GameResultModel PlayMove(GameResultModel game, string player, int move)
+        public GameResultModel PlayMove(GameInputModel game)
         {
-            move = move - 1;
+            var positionInArray = game.Move - 1;
+            var gameResult = NewGame();
 
-            if ( game.Board[move] != "" )
+            gameResult.Board = game.Board;
+            gameResult.CurrentPlayer = game.Player;
+
+            if(ValidateEmptyPosition(game.Board[positionInArray]) == false)
             {
-                game.State = "Invalid Move";
-
-                return game;
+                gameResult.State = "Invalid Move";
+                return gameResult;
             }
-            game.Board[move] = player;
-            var nextPlayer = player == game.Players[0] ? game.Players[1] : game.Players[0];
 
-            game.State = $"{nextPlayer}'s turn";
+            gameResult.Board[positionInArray] = gameResult.CurrentPlayer;
+            gameResult.CurrentPlayer = ChangePlayer(game);
+            gameResult.State = $"{gameResult.CurrentPlayer}'s turn";
 
-            return game;
+            return gameResult;
+        }
+
+        private bool ValidateEmptyPosition(string value)
+        {
+            return value == "";
+        }
+
+        private static string ChangePlayer(GameInputModel game)
+        {
+            return game.Player == "X" ? "O" : "X";
         }
     }
 }

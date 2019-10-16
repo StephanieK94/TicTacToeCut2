@@ -13,6 +13,9 @@ namespace TicTacToeCut2.Api.Tests
     {
         private readonly TicTacService service = new TicTacService();
 
+        // TODO: refactor these to test the logic implemented within rather than the service, so extract the logic out from the service itself.
+        // And just call it from the service?
+
         [Fact]
         public void Service_NewGame_ReturnsNewWebGame ()
         {
@@ -35,25 +38,32 @@ namespace TicTacToeCut2.Api.Tests
         [Fact]
         public void GameController_WhenPlaysMoveOf1_ReturnsChangedBoard ()
         {
-            var webGame = service.NewGame();
+            var gameInput = new GameInputModel()
+            {
+                Board = new string[9] { "", "", "", "", "", "", "", "", "" },
+                Player = "X",
+                Move = 1,
+            };
 
-            var result = service.PlayMove( webGame , "X" , 1 );
+            var result = service.PlayMove( gameInput);
 
             Assert.Equal("X" , result.Board[0] );
+            Assert.Equal("O's turn", result.State);
         }
-
-        // Should I add into the GameResultModel an extra player of the CurrentPlayer?
-        // How will I keep track of the Board and the current player?
 
         [Fact]
         public void WhenInvalidMovePlayed_ReturnsGameStateAsInvalid ()
         {
-            var webGame = service.NewGame();
-            webGame.Board[0] = "X";
+            var gameInput = new GameInputModel()
+            {
+                Board = new string[9] { "X", "", "", "", "", "", "", "", "" },
+                Player = "O",
+                Move = 1,
+            };
 
-            var result = service.PlayMove( webGame , "O" , 1 );
+            var result = service.PlayMove( gameInput );
 
-            Assert.Equal(webGame, result);
+            Assert.Equal(gameInput.Board, result.Board);
             Assert.Equal("Invalid Move", result.State);
         }
     }
