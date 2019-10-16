@@ -12,12 +12,13 @@ namespace TicTacToe.ConsoleApplication
         static void Main(string[] args)
         {
             StartNewGame:
+            Console.Clear();
             var service = new TicTacService();
             var game = service.NewGame();
 
-            service.StartGame(game);
+            service.Play(game);
 
-            if ( game.PromptForNewGame() == true )
+            if (service.PromptForNewGame() == true)
                 goto StartNewGame;
         }
     }
