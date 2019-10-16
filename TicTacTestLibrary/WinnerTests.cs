@@ -5,25 +5,26 @@ namespace TicTacToe.ConsoleApplication.Test
 {
     public class WinnerTests
     {
-        private readonly ConsoleGame _game;
+        private readonly ConsoleGameModel _game;
+        private TicTacService service;
 
         public WinnerTests()
         {
-            var service = new TicTacService();
+            service = new TicTacService();
             _game = service.NewGame();
         }
 
         [Fact]
         public void GivenColumnWin_ReturnWinnerTrue ()
         {
-            _game.Board.Layout = new string[9]
+            _game.Board = new string[9]
             {
                 "X" , "" , "" ,
                 "X" , "" , "" ,
                 "X" , "" , ""
             };
 
-            _game.WinCalculator.CalculateWinner(_game.Board.Layout);
+            _game.WinCalculator.CalculateWinner(_game.Board);
 
             Assert.True( _game.WinCalculator.IsWinner );
         }
@@ -31,14 +32,14 @@ namespace TicTacToe.ConsoleApplication.Test
         [Fact]
         public void GivenRowWin_ReturnWinnerTrue ()
         {
-            _game.Board.Layout = new string[9]
+            _game.Board = new string[9]
             {
                 "X", "X", "X",
                 "", "", "",
                 "", "", ""
             };
 
-            _game.WinCalculator.CalculateWinner( _game.Board.Layout );
+            _game.WinCalculator.CalculateWinner( _game.Board );
 
             Assert.True( _game.WinCalculator.IsWinner );
         }
@@ -46,14 +47,14 @@ namespace TicTacToe.ConsoleApplication.Test
         [Fact]
         public void GivenDiagonalWin_ReturnWinnerTrue ()
         {
-            _game.Board.Layout = new string[9]
+            _game.Board = new string[9]
             {
                 "X", "", "",
                 "", "X", "",
                 "", "", "X"
             };
 
-            _game.WinCalculator.CalculateWinner(_game.Board.Layout);
+            _game.WinCalculator.CalculateWinner(_game.Board);
 
             Assert.True( _game.WinCalculator.IsWinner );
         }
@@ -61,14 +62,14 @@ namespace TicTacToe.ConsoleApplication.Test
         [Fact]
         public void GivenReverseDiagonalWin_ReturnWinnerTrue ()
         {
-            _game.Board.Layout = new string[9]
+            _game.Board = new string[9]
             {
                 "X", "O", "X",
                 "O", "X", "O",
                 "X", "", "O"
             };
 
-            _game.WinCalculator.CalculateWinner( _game.Board.Layout );
+            _game.WinCalculator.CalculateWinner( _game.Board );
 
             Assert.True( _game.WinCalculator.IsWinner );
         }
@@ -76,14 +77,14 @@ namespace TicTacToe.ConsoleApplication.Test
         [Fact]
         public void GivenFullBoard_WhenNoWinner_ReturnWinnerIsEqualToFalse ()
         {
-            _game.Board.Layout = new string[9]
+            _game.Board = new string[9]
             {
                 "X", "X", "O",
                 "O", "O", "X",
                 "X", "O", "X"
             };
 
-            _game.WinCalculator.CalculateWinner(_game.Board.Layout);
+            _game.WinCalculator.CalculateWinner(_game.Board);
 
             Assert.False( _game.WinCalculator.IsWinner );
         }
@@ -91,14 +92,14 @@ namespace TicTacToe.ConsoleApplication.Test
         [Fact]
         public void GivenSingleMove_ReturnWinnerIsEqualToFalse ()
         {
-            _game.Board.Layout = new string[9]
+            _game.Board = new string[9]
             {
                 "X", "", "",
                 "", "", "",
                 "", "", ""
             };
 
-            _game.WinCalculator.CalculateWinner( _game.Board.Layout );
+            _game.WinCalculator.CalculateWinner( _game.Board );
 
             Assert.False( _game.WinCalculator.IsWinner );
         }
@@ -106,7 +107,7 @@ namespace TicTacToe.ConsoleApplication.Test
         [Fact]
         public void GivenNoWin_WhenPlaysSecondToLastMove_ReturnDrawTrue ()
         {
-            _game.Board.Layout = new string[]
+            _game.Board = new string[]
             {
                 "X" ,"X", "O",
                 "O", "O", "X",
@@ -117,15 +118,15 @@ namespace TicTacToe.ConsoleApplication.Test
             
             _game.CurrentPlayer = "O";
 
-            _game.PlayMove(nextMove.Position);
-            _game.WinCalculator.CalculateWinner( _game.Board.Layout );
+            service.PlayMove(nextMove.Position);
+            _game.WinCalculator.CalculateWinner( _game.Board );
 
             Assert.False( _game.WinCalculator.IsWinner );
         }
         [Fact]
         public void GivenNoWin_WhenPlaysLastMove_ReturnDrawTrue ()
         {
-            _game.Board.Layout = new string[9]
+            _game.Board = new string[9]
             {
                 "O", "O", "X",
                 "X", "X", "O",
@@ -136,8 +137,8 @@ namespace TicTacToe.ConsoleApplication.Test
 
             _game.CurrentPlayer = "X";
 
-            _game.PlayMove( nextMove.Position );
-            _game.WinCalculator.CalculateWinner( _game.Board.Layout );
+            service.PlayMove( nextMove.Position );
+            _game.WinCalculator.CalculateWinner( _game.Board );
 
             Assert.False( _game.WinCalculator.IsWinner );
         }

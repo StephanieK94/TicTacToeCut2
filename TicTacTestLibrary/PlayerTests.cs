@@ -5,11 +5,12 @@ namespace TicTacToe.ConsoleApplication.Test
 {
     public class PlayerTests
     {
-        private readonly ConsoleGame _game;
+        private readonly ConsoleGameModel _game;
+        private TicTacService service;
 
         public PlayerTests()
         {
-            var service = new TicTacService();
+            service = new TicTacService();
             _game = service.NewGame();
         }
 
@@ -26,7 +27,7 @@ namespace TicTacToe.ConsoleApplication.Test
         public void GivenCurrentPlayer_WhenChangedPlayerCalled_ReturnExpectedPlayer(string currentPlayer, string expectedPlayer)
         {
             _game.CurrentPlayer = currentPlayer;
-            _game.ChangePlayer();
+            service.ChangePlayer();
 
             Assert.Equal(expectedPlayer, _game.CurrentPlayer);
         }

@@ -11,63 +11,60 @@ namespace TicTacToeCut2.Api.Tests
 {
     public class GameControllerTests
     {
-        readonly GameController _controller = new GameController();
+        private readonly TicTacService service = new TicTacService();
+
+        // TODO: refactor these to test the logic implemented within rather than the service, so extract the logic out from the service itself.
+        // And just call it from the service?
 
         [Fact]
-        public void GameController_ReturnsNewGame ()
+        public void Service_NewGame_ReturnsNewWebGame ()
         {
-            var result = _controller.GetNewGame();
+            var result = service.NewGame();
 
             var expected = new GameResultModel()
             {
-                Board = new string[9],
-                Players = new List<PlayerModel>
+                Board = new string[9] { "","","", "" , "" , "" , "" , "" , "" } ,
+                Players = new List<string>
                 {
-                    new PlayerModel{ Piece = "X" },
-                    new PlayerModel{ Piece = "O" }
-                },
-                State = "New Model"
+                    "X","O"
+                } ,
+                State = "New Game"
             };
 
-            result.Model.Should().BeEquivalentTo(expected);
+            result.Should().BeEquivalentTo( expected );
         }
 
 
         [Fact]
         public void GameController_WhenPlaysMoveOf1_ReturnsChangedBoard ()
         {
-            var webGame = new WebGame();
-            var result = _controller.PlayMove( webGame , "X" , 1 );
-            var expected = new string[9] { "X" , null , null , null , null , null , null , null , null };
+            var gameInput = new GameInputModel()
+            {
+                Board = new string[9] { "", "", "", "", "", "", "", "", "" },
+                Player = "X",
+                Move = 1,
+            };
 
-            Assert.Equal( expected , result.Model.Board );
-        }
+            var result = service.PlayMove( gameInput);
 
-        // Should I add into the GameResultModel an extra player of the CurrentPlayer?
-        // How will I keep track of the Board and the current player?
-        //
-        [Fact( Skip = "Haven't decided how to note the current player or if need to switch them" )]
-        public void GameController_WhenPlaysMoveOf1_ReturnsChangedStateAndPlayer ()
-        {
-            var webGame = new WebGame();
-            var result = _controller.PlayMove( webGame , "X" , 1 );
-            var expected = new string[9] { "X" , null , null , null , null , null , null , null , null };
-
-            Assert.Equal( expected , result.Model.Board );
+            Assert.Equal("X" , result.Board[0] );
+            Assert.Equal("O's turn", result.State);
         }
 
         [Fact]
         public void WhenInvalidMovePlayed_ReturnsGameStateAsInvalid ()
         {
-            var webGame = new WebGame
+            var gameInput = new GameInputModel()
             {
-                Model = {Board = new string[9] {"X", null, null, null, null, null, null, null, null}}
+                Board = new string[9] { "X", "", "", "", "", "", "", "", "" },
+                Player = "O",
+                Move = 1,
             };
 
-            var result = _controller.PlayMove( webGame , "X" , 1 );
+            var result = service.PlayMove( gameInput );
 
-            Assert.Equal(webGame, result);
-            Assert.Equal("Invalid Move", result.Model.State);
+            Assert.Equal(gameInput.Board, result.Board);
+            Assert.Equal("Invalid Move", result.State);
         }
     }
 }

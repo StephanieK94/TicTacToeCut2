@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="ConsoleMessages.csv">
+    <Content Include="Messages-IgnoreForNow\ConsoleMessages.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

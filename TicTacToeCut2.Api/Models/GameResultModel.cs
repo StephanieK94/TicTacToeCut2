@@ -5,18 +5,8 @@ namespace TicTacToeCut2.Api.Models
     public class GameResultModel
     {
         public string[] Board { get; set; }
-        public List<PlayerModel> Players { get; set; }
+        public List<string> Players { get; set; }
         public string State { get; set; }
-
-        public GameResultModel()
-        {
-            Board = new string[9];
-            Players = new List<PlayerModel>()
-            {
-                new PlayerModel(){Piece = "X"},
-                new PlayerModel(){Piece = "O"},
-            };
-            State = "New Model";
-        }
+        public string CurrentPlayer { get; internal set; }
     }
 }

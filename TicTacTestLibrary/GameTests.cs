@@ -6,11 +6,12 @@ namespace TicTacToe.ConsoleApplication.Test
 {
     public class GameTests
     {
-        private readonly ConsoleGame _newGame;
+        private readonly ConsoleGameModel _newGame;
+        private TicTacService service;
 
         public GameTests()
         {
-            var service = new TicTacService();
+            service = new TicTacService();
             _newGame = service.NewGame();
         }
 
@@ -19,7 +20,7 @@ namespace TicTacToe.ConsoleApplication.Test
         {
             var expectedGameBoard = new string[9]{ "", "" , "" , "" , "" , "" , "" , "" , "" };
 
-            Assert.Equal( expectedGameBoard , _newGame.Board.Layout );
+            Assert.Equal( expectedGameBoard , _newGame.Board );
         }
 
         [Fact]

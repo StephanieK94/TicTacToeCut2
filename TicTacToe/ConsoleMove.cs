@@ -6,14 +6,16 @@ namespace TicTacToe.ConsoleApplication
     {
         private int _row;
         private int _column;
-
-        public int Position { get; set; }
-
-        public string GetInput ()
+        public int Row
         {
-            var input = Console.ReadLine();
-            return input;
+            set { _row = value - 1; } get { return _row; }
         }
+
+        public int Column
+        {
+             set { _column = value - 1; } get { return _column; }
+        }
+        public int Position { get; set; }
 
         public bool CheckForForfeit ( string userInput )
         {
@@ -26,8 +28,8 @@ namespace TicTacToe.ConsoleApplication
             {
                 var input = userString.Split( ',' );
 
-                this._row = Convert.ToInt32( input[0] ) -1;
-                this._column = Convert.ToInt32( input[1] ) -1;
+                this.Row = Convert.ToInt32( input[0] );
+                this.Column = Convert.ToInt32( input[1] );
 
                 return true;
             }

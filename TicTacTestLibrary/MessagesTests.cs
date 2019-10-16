@@ -5,21 +5,21 @@ namespace TicTacToe.ConsoleApplication.Test
 {
     public class MessagesTests
     {
-        private readonly ConsoleGame _game;
+        private readonly ConsoleGameModel _game;
+        private TicTacService service ;
 
         public MessagesTests()
         {
-            var service = new TicTacService();
+            service = new TicTacService();
             _game = service.NewGame();
         }
 
         [Fact]
         public void WhenWelcomeMessageCalled_ReturnsExpectedString()
         {
-            var dict = _game.Message.ConsoleMessages;
-            var actual = dict["AcceptedMove"];
+            var msg = _game.Message.AcceptedMove();
         
-            Assert.Equal( "Move accepted here's the current board:", actual);
+            Assert.Equal( "Move accepted here's the current board:", msg);
         }
     }
 }

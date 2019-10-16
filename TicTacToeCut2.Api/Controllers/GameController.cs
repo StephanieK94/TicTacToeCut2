@@ -18,38 +18,21 @@ namespace TicTacToeCut2.Api.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
+        private readonly TicTacService service = new TicTacService();
+
         // GET api/tictactoe
         [HttpGet]
-        public WebGame GetNewGame ()
+        public GameResultModel Get ()
         {
-            return new WebGame();
-
-        }
-
-        // GET api/tictactoe/players
-        [HttpGet( "/players" )]
-        public ActionResult<IEnumerable<PlayerModel>> GetPlayersList ()
-        {
-            var webGame = new WebGame();
-            return webGame.Model.Players;
+            return service.NewGame();
         }
 
         // POST api/tictactoe/players/X/1
-        [HttpPost( "/players/{player}/{move}" )]
-        public WebGame PlayMove ( WebGame game , string playerPiece , int move )
+        [HttpPost( "/play/{game}" )]
+        public GameResultModel Play ( GameInputModel game)
         {
-            move = move - 1;
-            if ( game.Model.Board[move] != null )
-            { 
-                game.Model.State = "Invalid Move";
-
-                return game;
-            }
-            game.Model.Board[move] = playerPiece;
-            var nextPlayer = playerPiece == game.Model.Players[0].Piece ? game.Model.Players[1].Piece : game.Model.Players[0].Piece;
-            //game.Model.State = new string($"{0}'s turn", nextPlayer);
-
-            return game;
+            var newGame = service.PlayMove(game);
+            return newGame;
         }
     }
 }
