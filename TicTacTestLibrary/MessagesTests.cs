@@ -5,11 +5,12 @@ namespace TicTacToe.ConsoleApplication.Test
 {
     public class MessagesTests
     {
-        private readonly consoleGame _game;
+        private readonly ConsoleGame _game;
+        private TicTacService service ;
 
         public MessagesTests()
         {
-            var service = new TicTacService();
+            service = new TicTacService();
             _game = service.NewGame();
         }
 

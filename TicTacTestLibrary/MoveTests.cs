@@ -4,11 +4,11 @@ namespace TicTacToe.ConsoleApplication.Test
 {
     public class MoveTests
     {
-        private readonly consoleGame _game;
-
+        private readonly ConsoleGame _game;
+        private TicTacService service;
         public MoveTests()
         {
-            var service = new TicTacService();
+            service = new TicTacService();
             _game = service.NewGame();
         }
 
@@ -21,7 +21,7 @@ namespace TicTacToe.ConsoleApplication.Test
         [InlineData( "-1,-1" , false )]
         public void GivenInput_WhenValidationForInputCalled_ReturnsExpectedResult(string userInput, bool expectedResult)
         {
-            var actual = _game.ValidateInput( userInput );
+            var actual = service.ValidateInput( userInput );
 
             Assert.Equal(expectedResult, actual);
         }
