@@ -16,35 +16,7 @@ namespace TicTacToe.ConsoleApplication
              set { _column = value - 1; } get { return _column; }
         }
         public int Position { get; set; }
-
-        public bool CheckForForfeit ( string userInput )
-        {
-            return userInput.Contains( "Q" ) || userInput.Contains( "q" );
-        }
-
-        public bool CanConvertPlayerInputToMove ( string userString )
-        {
-            try
-            {
-                var input = userString.Split( ',' );
-
-                this.Row = Convert.ToInt32( input[0] );
-                this.Column = Convert.ToInt32( input[1] );
-
-                return true;
-            }
-            catch ( FormatException )
-            {
-                return false;
-            }
-        }
-
-        public bool ValidateMoveWithinRange ()
-        {
-            if ( _row < 0 || _row > 2 ) return false;
-            return _column >= 0 && _column <= 2;
-        }
-
+        
         public void ConvertToPosition()
         {
             switch (this._row)

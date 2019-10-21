@@ -13,15 +13,17 @@ namespace TicTacToe.ConsoleApplication.Test
         }
 
         [Theory]
-        [InlineData( "1,1" , true )]
-        [InlineData( "2,2" , true )]
-        [InlineData( "3,3", true )]
-        [InlineData( "0,0" , false )]
-        [InlineData( "4,4" , false )]
-        [InlineData( "-1,-1" , false )]
-        public void GivenInput_WhenValidationForInputCalled_ReturnsExpectedResult(string userInput, bool expectedResult)
+        [InlineData(1,1 , true )]
+        [InlineData(2,2 , true )]
+        [InlineData(3,3, true )]
+        [InlineData(0,0 , false )]
+        [InlineData(4,4 , false )]
+        [InlineData(-1,-1 , false )]
+        public void GivenInput_WhenValidateMoveWithinRangeCalled_ReturnsExpectedResult(int row, int column, bool expectedResult)
         {
-            var actual = service.ValidateInput( userInput );
+            _game.CurrentMove.Row = row;
+            _game.CurrentMove.Column = column;
+            var actual = service.ValidateMoveWithinRange( _game.CurrentMove );
 
             Assert.Equal(expectedResult, actual);
         }
@@ -33,7 +35,7 @@ namespace TicTacToe.ConsoleApplication.Test
         [InlineData( "1,P", false)]
         public void GivenInput_WhenCheckForForfeit_ReturnsExpectedOutput(string input, bool output)
         {
-            var playerForfeits = _game.CurrentMove.CheckForForfeit( input );
+            var playerForfeits = service.CheckForForfeit( input );
 
             Assert.Equal( output, playerForfeits );
         }
@@ -43,7 +45,7 @@ namespace TicTacToe.ConsoleApplication.Test
         {
             var input = ",1";
 
-            var isValidInput = _game.CurrentMove.CanConvertPlayerInputToMove( input );
+            var isValidInput = service.CanConvertPlayerInputToMove( input );
 
             Assert.False( isValidInput );
         }
