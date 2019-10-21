@@ -9,11 +9,6 @@ namespace TicTacToe.ConsoleApplication
             return new ConsoleMove();
         }
 
-        public static MessageProcessor CreateConsoleMsgProcessor()
-        {
-            return new MessageProcessor();
-        }
-
         public static ConsoleWinCalculator CreateConsoleWinCalculator()
         {
             return new ConsoleWinCalculator();
