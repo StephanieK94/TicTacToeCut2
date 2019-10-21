@@ -12,34 +12,52 @@ namespace TicTacToeCut2.Api
         public GameResultModel NewGame()
         {
             var game = new Game();
-            var webModel = new GameResultModel()
+            var resultModel = new GameResultModel()
             {
                 Board = game.Board,
-                Players = new List<string>() { "X", "O"},
+                Players = new List<string>() { game.Player, "O"},
                 State = "New Game",
             };
-            return webModel;
+            return resultModel;
         }
 
-        public GameResultModel PlayMove(GameInputModel game)
+        public GameResultModel PlayMove(GameInputModel inputGame)
         {
-            var positionInArray = game.Move - 1;
+            var positionInArray = inputGame.Move - 1;
             var gameResult = NewGame();
 
-            gameResult.Board = game.Board;
-            gameResult.CurrentPlayer = game.Player;
+            gameResult.Board = inputGame.Board;
+            gameResult.CurrentPlayer = inputGame.Player;
 
-            if(ValidateEmptyPosition(game.Board[positionInArray]) == false)
+            if(ValidateEmptyPosition(inputGame.Board[positionInArray]) == false)
             {
                 gameResult.State = "Invalid Move";
                 return gameResult;
             }
 
             gameResult.Board[positionInArray] = gameResult.CurrentPlayer;
-            gameResult.CurrentPlayer = ChangePlayer(game);
-            gameResult.State = $"{gameResult.CurrentPlayer}'s turn";
+            
+
+            if(GameIsWon(gameResult) == true)
+            {
+                gameResult.State = $"{gameResult.CurrentPlayer} won!";
+            }
+            else 
+            {
+                gameResult.CurrentPlayer = ChangePlayer(inputGame);
+                gameResult.State = $"{gameResult.CurrentPlayer}'s turn";
+            }
 
             return gameResult;
+        }
+
+        public bool GameIsWon(GameResultModel game)
+        {
+            WinCalculator winCalcuator = new WinCalculator();
+            winCalcuator.CalculateWinner(game.Board);
+
+            if(winCalcuator.IsWinner == true) return true;
+            return false;
         }
 
         private bool ValidateEmptyPosition(string value)

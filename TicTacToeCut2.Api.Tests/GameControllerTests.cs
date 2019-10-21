@@ -11,16 +11,26 @@ namespace TicTacToeCut2.Api.Tests
 {
     public class GameControllerTests
     {
-        private readonly TicTacService service = new TicTacService();
+        private readonly TicTacService service;
+        private readonly GameInputModel inputModel;
+        private readonly GameResultModel gameResult;
+        private readonly WinCalculator winCalculator;
 
-        // TODO: refactor these to test the logic implemented within rather than the service, so extract the logic out from the service itself.
-        // And just call it from the service?
+        public GameControllerTests()
+        {
+            service = new TicTacService();
+            gameResult = service.NewGame();
+            inputModel = new GameInputModel()
+            {
+                Board = new string[9] { "", "", "", "", "", "", "", "", "" },
+                Player = "X",
+            };
+            winCalculator = new WinCalculator();
+        }
 
         [Fact]
         public void Service_NewGame_ReturnsNewWebGame ()
         {
-            var result = service.NewGame();
-
             var expected = new GameResultModel()
             {
                 Board = new string[9] { "","","", "" , "" , "" , "" , "" , "" } ,
@@ -31,21 +41,15 @@ namespace TicTacToeCut2.Api.Tests
                 State = "New Game"
             };
 
-            result.Should().BeEquivalentTo( expected );
+            gameResult.Should().BeEquivalentTo( expected );
         }
 
 
         [Fact]
         public void GameController_WhenPlaysMoveOf1_ReturnsChangedBoard ()
         {
-            var gameInput = new GameInputModel()
-            {
-                Board = new string[9] { "", "", "", "", "", "", "", "", "" },
-                Player = "X",
-                Move = 1,
-            };
-
-            var result = service.PlayMove( gameInput);
+            inputModel.Move = 1;
+            var result = service.PlayMove( inputModel);
 
             Assert.Equal("X" , result.Board[0] );
             Assert.Equal("O's turn", result.State);
@@ -54,17 +58,22 @@ namespace TicTacToeCut2.Api.Tests
         [Fact]
         public void WhenInvalidMovePlayed_ReturnsGameStateAsInvalid ()
         {
-            var gameInput = new GameInputModel()
-            {
-                Board = new string[9] { "X", "", "", "", "", "", "", "", "" },
-                Player = "O",
-                Move = 1,
-            };
+            inputModel.Board[0] = "X";
+            inputModel.Player = "O";
+            inputModel.Move = 1;
 
-            var result = service.PlayMove( gameInput );
+            var result = service.PlayMove( inputModel );
 
-            Assert.Equal(gameInput.Board, result.Board);
+            Assert.Equal(inputModel.Board, result.Board);
             Assert.Equal("Invalid Move", result.State);
+        }
+
+        [Fact]
+        public void WhenBoardHasRowWin_WinCalculator_ReturnsIsWinnerIsTrue()
+        {
+            gameResult.Board = new string[9] { "X", "X", "X", "O", "O", "", "", "", "" };
+
+            Assert.True(service.GameIsWon(gameResult));
         }
     }
 }
