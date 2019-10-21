@@ -27,7 +27,7 @@ namespace TicTacToe.ConsoleApplication.Test
         public void GivenCurrentPlayer_WhenChangedPlayerCalled_ReturnExpectedPlayer(string currentPlayer, string expectedPlayer)
         {
             _game.CurrentPlayer = currentPlayer;
-            service.ChangePlayer();
+            _game.CurrentPlayer = service.ChangePlayer(_game.CurrentPlayer);
 
             Assert.Equal(expectedPlayer, _game.CurrentPlayer);
         }
