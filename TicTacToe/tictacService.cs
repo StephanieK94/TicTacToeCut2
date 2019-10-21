@@ -128,8 +128,9 @@ namespace TicTacToe.ConsoleApplication
             try
             {
                 var input = userString.Split(',');
+                if (input.Length != 3) return false;
+                
                 int number;
-
                 var rowSuccess = int.TryParse(input[0], out number);
                 var colSuccess = int.TryParse(input[1], out number);
 
