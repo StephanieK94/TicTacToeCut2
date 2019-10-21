@@ -29,16 +29,29 @@ namespace TicTacToe.ConsoleApplication
 
         public void Play(ConsoleGameModel _game)
         {
-            // Passing over whatever game needed (could be a new game or a resumed game)
+            // Passing over whatever game needed (could be a new game or later a resumed game)
             // sets the private game for service as this game
             game = _game;
             StartGame();
 
             MovePrompt:
             game.ConsoleWriter.PrintOutput(game.Message.PromptForMove());
+
             var input = game.ConsoleReader.GetInput();
 
-            if ( ValidateInput( input ) == false ) goto MovePrompt;
+            if (CheckForForfeit(input) == true)
+            {
+                game.CurrentPlayer = ChangePlayer(game.CurrentPlayer);
+                game.WinCalculator.IsWinner = true;
+                goto End;
+            }
+
+            if (CanConvertPlayerInputToMove(input) == false)
+            {
+                game.ConsoleWriter.PrintOutput(game.Message.InvalidInput());
+                goto MovePrompt;
+            }
+
             SetMove(input);
 
             if (ValidateMoveWithinRange(game.CurrentMove) == false)
@@ -46,6 +59,7 @@ namespace TicTacToe.ConsoleApplication
                 game.ConsoleWriter.PrintOutput(game.Message.OutOfBounds());
                 goto MovePrompt;
             }
+
             game.CurrentMove.ConvertToPosition();
 
             if ( game.WinCalculator.IsWinner == true ) goto End;
@@ -56,24 +70,27 @@ namespace TicTacToe.ConsoleApplication
 
             if ( game.WinCalculator.IsWinner == false && game.TurnCount < 9 )
             {
-                ChangePlayer();
+                game.CurrentPlayer = ChangePlayer(game.CurrentPlayer);
                 goto MovePrompt;
             }
 
             End:
             EndGame();
         }
+
         private void StartGame()
         {
             game.ConsoleWriter.PrintOutput(game.Message.Welcome());
             game.ConsoleWriter.PrintBoard(game.Board);
         }
+
         private void EndGame()
         {
             game.ConsoleWriter.PrintOutput(game.WinCalculator.IsWinner == false
                 ? game.Message.ReturnDraw()
             : game.Message.ReturnWinner(game.CurrentPlayer));
         }
+
         public bool PlayMove(int currentMove)
         {
             if (game.Board[currentMove] != "")
@@ -88,30 +105,10 @@ namespace TicTacToe.ConsoleApplication
             }
             return true;
         }
-        public bool ValidateInput(string playerInput)
+
+        public string ChangePlayer(string currentPlayer)
         {
-            var isForfeit = CheckForForfeit(playerInput);
-            if (isForfeit == true)
-            {
-                ChangePlayer();
-                game.WinCalculator.IsWinner = true;
-                return true;
-            }
-
-            var isConvertable = CanConvertPlayerInputToMove(playerInput);
-            if (isConvertable == false)
-            {
-                game.ConsoleWriter.PrintOutput(game.Message.InvalidInput());
-                return false;
-            }
-
-            return true;
-        }
-
-
-        public void ChangePlayer()
-        {
-            game.CurrentPlayer = (game.CurrentPlayer == "X") ? "O" : "X";
+            return (currentPlayer == "X") ? "O" : "X";
         }
 
         public bool CheckForForfeit(string userInput)
@@ -131,14 +128,12 @@ namespace TicTacToe.ConsoleApplication
             try
             {
                 var input = userString.Split(',');
-                int row;
-                int col;
+                int number;
 
-                var rowSuccess = int.TryParse(input[0], out row);
-                var colSuccess = int.TryParse(input[1], out col);
+                var rowSuccess = int.TryParse(input[0], out number);
+                var colSuccess = int.TryParse(input[1], out number);
 
-                if (rowSuccess != true || colSuccess != true) return false;
-                return true;
+                return (rowSuccess != true || colSuccess != true);
             }
             catch (FormatException)
             {
