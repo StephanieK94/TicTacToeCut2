@@ -6,12 +6,14 @@ namespace TicTacToe.ConsoleApplication.Test
     public class WinnerTests
     {
         private readonly ConsoleGameModel _game;
-        private TicTacService service;
+        private TicTacService _service;
+        private ConsoleWinCalculator _winCalculator;
 
         public WinnerTests()
         {
-            service = new TicTacService();
-            _game = service.NewGame();
+            _service = new TicTacService();
+            _game = _service.NewGame();
+            _winCalculator = Factory.CreateConsoleWinCalculator();
         }
 
         [Fact]
@@ -24,9 +26,9 @@ namespace TicTacToe.ConsoleApplication.Test
                 "X" , "" , ""
             };
 
-            _game.WinCalculator.CalculateWinner(_game.Board);
+            _winCalculator.CalculateWinner(_game.Board);
 
-            Assert.True( _game.WinCalculator.IsWinner );
+            Assert.True( _winCalculator.IsWinner );
         }
 
         [Fact]
@@ -39,9 +41,9 @@ namespace TicTacToe.ConsoleApplication.Test
                 "", "", ""
             };
 
-            _game.WinCalculator.CalculateWinner( _game.Board );
+            _winCalculator.CalculateWinner( _game.Board );
 
-            Assert.True( _game.WinCalculator.IsWinner );
+            Assert.True( _winCalculator.IsWinner );
         }
 
         [Fact]
@@ -54,9 +56,9 @@ namespace TicTacToe.ConsoleApplication.Test
                 "", "", "X"
             };
 
-            _game.WinCalculator.CalculateWinner(_game.Board);
+            _winCalculator.CalculateWinner(_game.Board);
 
-            Assert.True( _game.WinCalculator.IsWinner );
+            Assert.True( _winCalculator.IsWinner );
         }
 
         [Fact]
@@ -69,9 +71,9 @@ namespace TicTacToe.ConsoleApplication.Test
                 "X", "", "O"
             };
 
-            _game.WinCalculator.CalculateWinner( _game.Board );
+            _winCalculator.CalculateWinner( _game.Board );
 
-            Assert.True( _game.WinCalculator.IsWinner );
+            Assert.True( _winCalculator.IsWinner );
         }
 
         [Fact]
@@ -84,9 +86,9 @@ namespace TicTacToe.ConsoleApplication.Test
                 "X", "O", "X"
             };
 
-            _game.WinCalculator.CalculateWinner(_game.Board);
+            _winCalculator.CalculateWinner(_game.Board);
 
-            Assert.False( _game.WinCalculator.IsWinner );
+            Assert.False( _winCalculator.IsWinner );
         }
 
         [Fact]
@@ -99,48 +101,25 @@ namespace TicTacToe.ConsoleApplication.Test
                 "", "", ""
             };
 
-            _game.WinCalculator.CalculateWinner( _game.Board );
+            _winCalculator.CalculateWinner( _game.Board );
 
-            Assert.False( _game.WinCalculator.IsWinner );
+            Assert.False( _winCalculator.IsWinner );
         }
 
+       
         [Fact]
-        public void GivenNoWin_WhenPlaysSecondToLastMove_ReturnDrawTrue ()
-        {
-            _game.Board = new string[]
-            {
-                "X" ,"X", "O",
-                "O", "O", "X",
-                "X", "", ""
-            };
-
-            var nextMove = new ConsoleMove(){Position = 8};
-            
-            _game.CurrentPlayer = "O";
-
-            service.PlayMove(nextMove.Position);
-            _game.WinCalculator.CalculateWinner( _game.Board );
-
-            Assert.False( _game.WinCalculator.IsWinner );
-        }
-        [Fact]
-        public void GivenNoWin_WhenPlaysLastMove_ReturnDrawTrue ()
+        public void GivenNoWin_ReturnDrawTrue ()
         {
             _game.Board = new string[9]
             {
                 "O", "O", "X",
                 "X", "X", "O",
-                "O", "X", ""
+                "O", "X", "X"
             };
 
-            var nextMove = new ConsoleMove(){Position = 8};
+            _winCalculator.CalculateWinner( _game.Board );
 
-            _game.CurrentPlayer = "X";
-
-            service.PlayMove( nextMove.Position );
-            _game.WinCalculator.CalculateWinner( _game.Board );
-
-            Assert.False( _game.WinCalculator.IsWinner );
+            Assert.False( _winCalculator.IsWinner );
         }
     }
 }
