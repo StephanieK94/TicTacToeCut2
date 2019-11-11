@@ -1,5 +1,15 @@
 trigger:
-  - master
+  batch: true
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - docs/*
+    exclude:
+      - docs/README.md
+      - docs/TicTacTestLibrary/*
+      - docs/TicTacToeConsole/*
 
 pool:
   vmImage: 'ubuntu-latest'
