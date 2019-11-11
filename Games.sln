@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.ConsoleApplication", "TicTacToe\TicTacToe.ConsoleApplication.csproj", "{B8531B68-11F8-4913-936E-1FB52D30D9E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.ConsoleApplication", "TicTacToeConsole\TicTacToe.ConsoleApplication.csproj", "{B8531B68-11F8-4913-936E-1FB52D30D9E0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.ConsoleApplication.Test", "TicTacTestLibrary\TicTacToe.ConsoleApplication.Test.csproj", "{2F5E2D70-EF38-496B-9A9A-1951693E9580}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.ConsoleApplication.Test", "TicTacToeConsole.Test\TicTacToe.ConsoleApplication.Test.csproj", "{2F5E2D70-EF38-496B-9A9A-1951693E9580}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToeCut2.Api", "TicTacToeCut2.Api\TicTacToeCut2.Api.csproj", "{4C9D1525-B1E7-496B-B23C-4309700810B2}"
 EndProject

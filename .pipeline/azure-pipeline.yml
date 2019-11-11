@@ -8,7 +8,7 @@ trigger:
       - '*'
     exclude:
       - docs/README.md
-      - 'TicTacToeConsole/*'
+      - '*TicTacToeConsole/*'
 
 pool:
   vmImage: 'ubuntu-latest'
