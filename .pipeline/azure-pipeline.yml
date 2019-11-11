@@ -5,11 +5,10 @@ trigger:
       - master
   paths:
     include:
-      - docs/*
+      - '*'
     exclude:
       - docs/README.md
-      - docs/TicTacTestLibrary/*
-      - docs/TicTacToeConsole/*
+      - 'TicTacToeConsole/*'
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -24,10 +23,33 @@ steps:
   - task: DotNetCoreCLI@2
     inputs:
       command: restore
-      projects: '**/*.csproj'
+      projects: '*Api/*.csproj'
   - task: DotNetCoreCLI@2
     displayName: Build
     inputs:
       command: build
-      projects: '**/*.csproj'
+      projects: '*Api/*.csproj'
       arguments: '--configuration Release' # Update this to match your need
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: test
+      projects: '*Api.Tests/*.csproj'
+      arguments: '--configuration $(buildConfiguration)'
+  # - script: dotnet test <test-project> --logger trx
+  # - task: PublishTestResults@2
+  #   condition: succeededOrFailed()
+  #   inputs:
+  #     testRunner: VSTest
+  #     testResultsFiles: '**/*.trx'
+  #   - task: DotNetCoreCLI@2
+  #   inputs:
+  #     command: publish
+  #     publishWebProjects: True
+  #     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+  #     zipAfterPublish: True
+
+  # # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
+  # - task: PublishBuildArtifacts@1
+  #   inputs:
+  #     pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+  #     artifactName: 'myWebsiteName'
