@@ -23,17 +23,17 @@ steps:
   - task: DotNetCoreCLI@2
     inputs:
       command: restore
-      projects: '*Api/*.csproj'
+      projects: '**/*Api/*.csproj'
   - task: DotNetCoreCLI@2
     displayName: Build
     inputs:
       command: build
-      projects: '*Api/*.csproj'
+      projects: '**/*Api/*.csproj'
       arguments: '--configuration Release' # Update this to match your need
   - task: DotNetCoreCLI@2
     inputs:
       command: test
-      projects: '*Api.Tests/*.csproj'
+      projects: '**/*Tests/*.csproj'
       arguments: '--configuration $(buildConfiguration)'
   # - script: dotnet test <test-project> --logger trx
   # - task: PublishTestResults@2
