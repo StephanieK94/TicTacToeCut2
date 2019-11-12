@@ -18,7 +18,7 @@ steps:
     displayName: 'Use .NET Core sdk'
     inputs:
       packageType: sdk
-      version: 3.0.x
+      version: 2.1.x
       installationPath: $(Agent.ToolsDirectory)/dotnet
   - task: DotNetCoreCLI@2
     inputs:
@@ -29,7 +29,7 @@ steps:
     inputs:
       command: build
       projects: '**/*Api/*.csproj'
-      arguments: '--configuration Release' # Update this to match your need
+      arguments: '--configuration Release'
   - task: DotNetCoreCLI@2
     inputs:
       command: test
