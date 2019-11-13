@@ -8,48 +8,39 @@ trigger:
       - '*'
     exclude:
       - docs/README.md
-      - '*TicTacToeConsole/*'
+      - 'TicTacToeConsole/*'
 
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-  - task: UseDotNet@2
-    displayName: 'Use .NET Core sdk'
-    inputs:
-      packageType: sdk
-      version: 2.1.x
-      installationPath: $(Agent.ToolsDirectory)/dotnet
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: restore
-      projects: '**/*Api/*.csproj'
-  - task: DotNetCoreCLI@2
-    displayName: Build
-    inputs:
-      command: build
-      projects: '**/*Api/*.csproj'
-      arguments: '--configuration Release'
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: test
-      projects: '**/*Tests/*.csproj'
-      arguments: '--configuration $(buildConfiguration)'
-  # - script: dotnet test <test-project> --logger trx
-  # - task: PublishTestResults@2
-  #   condition: succeededOrFailed()
-  #   inputs:
-  #     testRunner: VSTest
-  #     testResultsFiles: '**/*.trx'
-  #   - task: DotNetCoreCLI@2
-  #   inputs:
-  #     command: publish
-  #     publishWebProjects: True
-  #     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-  #     zipAfterPublish: True
-
-  # # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
-  # - task: PublishBuildArtifacts@1
-  #   inputs:
-  #     pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-  #     artifactName: 'myWebsiteName'
+stages:
+- stage: Build
+  jobs:
+  - job: BuildJob
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Use .NET Core sdk'
+      inputs:
+        packageType: sdk
+        version: 2.1.x
+        installationPath: $(Agent.ToolsDirectory)/dotnet
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'restore'
+        projects: '*/TicTacToeCut2.Api.csproj'
+        configuration: Release
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'build'
+        projects: '*/TicTacToeCut2.Api.csproj'
+        arguments: '--configuration Release'
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)' 
+        includeRootFolder: false
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)_$(Build.BuildId).zip' 
+        replaceExistingArchive: true
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: "$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)_$(Build.BuildId).zip"
+        ArtifactName: $(Build.DefinitionName)
