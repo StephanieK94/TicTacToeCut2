@@ -34,13 +34,13 @@ stages:
         command: 'build'
         projects: '*/TicTacToeCut2.Api.csproj'
         arguments: '--configuration Release'
-    - task: ArchiveFiles@2
-      inputs:
-        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)' 
-        includeRootFolder: false
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)_$(Build.BuildId).zip' 
-        replaceExistingArchive: true
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: "$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)_$(Build.BuildId).zip"
-        ArtifactName: $(Build.DefinitionName)
+    # - task: ArchiveFiles@2
+    #   inputs:
+    #     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)' 
+    #     includeRootFolder: false
+    #     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)_$(Build.BuildId).zip' 
+    #     replaceExistingArchive: true
+    # - task: PublishBuildArtifacts@1
+    #   inputs:
+    #     PathtoPublish: "$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)_$(Build.BuildId).zip"
+    #     ArtifactName: $(Build.DefinitionName)
