@@ -48,7 +48,7 @@ stages:
   jobs:
   - job: TestJob
     steps:
-    - task:
+    - task: DotNetCoreCLI@2
       inputs:
         command: 'test'
         projects: '*/TicTacToeCut2.Api.Tests.csproj'
